@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ – Blackbird Partner Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0b0b0b;
+      --surface: #1c1a1f;
+      --surface-hover: #222;
+      --border: #48454f;
+      --border-hover: #928f99;
+      --text: #fcfcfc;
+      --text-secondary: #ababab;
+      --text-muted: #928f99;
+      --accent: #4C5FF9;
+      --accent-dim: #3a4de0;
+      --accent-bright: #7080fb;
+      --accent-bg: rgba(76, 95, 249, 0.10);
+      --accent-border: rgba(76, 95, 249, 0.25);
+      --danger: #ff5449;
+      --danger-bg: rgba(255, 84, 73, 0.08);
+      --container-low: #1b1b1b;
+      --radius: 8px;
+      --radius-sm: 6px;
+      --radius-lg: 12px;
+      --radius-pill: 9999px;
+      --shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+      --brand-yellow: #feea56;
+      --transition: 150ms ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Header ───────────────────────────────────── */
+    .header {
+      padding: 24px 0 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .header-inner { justify-content: center; }
+      .header-inner .logo-area { width: 100%; justify-content: center; }
+      .header-nav { justify-content: center; }
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-text span {
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-left: 8px;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px 16px;
+      flex-wrap: wrap;
+    }
+
+    .header-badge {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: none;
+      padding: 8px 14px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .header-badge.active {
+      color: #ffffff;
+      background: var(--surface);
+      border: 1px solid var(--accent);
+    }
+
+    a.header-badge:hover {
+      color: var(--text);
+      background: var(--surface);
+      border-color: var(--accent);
+    }
+
+    .header-badge-contact {
+      font-weight: 700;
+      color: var(--brand-yellow);
+      background: rgba(254, 234, 86, 0.12);
+      border: 1px solid rgba(254, 234, 86, 0.3);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+    }
+
+    a.header-badge-contact:hover {
+      color: var(--brand-yellow);
+      background: rgba(254, 234, 86, 0.2);
+      border-color: rgba(254, 234, 86, 0.5);
+    }
+
+    /* ── What is Blackbird ───────────────────────── */
+    .blackbird-intro { margin-bottom: 40px; }
+    .blackbird-intro p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .blackbird-intro p:last-child { margin-bottom: 0; }
+    .blackbird-intro strong { color: var(--text); font-weight: 600; }
+    .blackbird-intro .elevator-pitch {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .blackbird-intro .elevator-pitch strong { color: var(--accent-bright); }
+    .section-header-toggle {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+      font-family: inherit;
+      padding: 0;
+      margin-bottom: 24px;
+    }
+    .section-header-toggle:hover .section-title { color: var(--accent-bright); }
+    .section-chevron {
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .collapsible-section:not(.open) .section-chevron { transform: rotate(-90deg); }
+    .collapsible-body {
+      display: grid;
+      grid-template-rows: 1fr;
+      transition: grid-template-rows 400ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .collapsible-section:not(.open) .collapsible-body { grid-template-rows: 0fr; }
+    .collapsible-body-inner { overflow: hidden; }
+    .divider { height: 1px; background: var(--border); margin: 8px 0 48px; }
+
+    /* ── Section Headers ─────────────────────────── */
+    .section-header { margin-bottom: 32px; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-bright);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-top: 8px;
+      max-width: 540px;
+    }
+
+    /* ── Accordion ────────────────────────────────── */
+    .accordion-group { margin-bottom: 64px; }
+
+    .accordion-section-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-bright);
+      margin: 40px 0 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--accent-border);
+    }
+
+    .accordion-section-title:first-child { margin-top: 0; }
+
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      overflow: hidden;
+      transition: border-color var(--transition);
+    }
+
+    .accordion-item:hover { border-color: var(--border-hover); }
+    .accordion-item.open { border-color: var(--border-hover); }
+
+    .accordion-trigger {
+      width: 100%;
+      background: var(--surface);
+      border: none;
+      color: var(--text);
+      padding: 18px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: background var(--transition);
+    }
+
+    .accordion-trigger:hover { background: var(--surface-hover); }
+
+    .accordion-trigger-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .accordion-chevron {
+      transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+      color: var(--text-muted);
+    }
+
+    .accordion-item.open .accordion-chevron { transform: rotate(180deg); }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 350ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .accordion-item.open .accordion-content {
+      max-height: 600px;
+    }
+
+    .accordion-body {
+      padding: 12px 20px 20px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .accordion-body p { margin-bottom: 12px; }
+    .accordion-body p:last-child { margin-bottom: 0; }
+    .accordion-body strong { color: var(--text); font-weight: 600; }
+    .accordion-body ul { padding-left: 20px; margin-bottom: 12px; }
+    .accordion-body li { margin-bottom: 6px; }
+
+    .accordion-body .callout {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+
+    .accordion-body .callout-warn {
+      background: var(--danger-bg);
+      border-color: rgba(255, 84, 73, 0.2);
+    }
+
+    .accordion-body .callout strong { color: var(--accent-bright); }
+    .accordion-body .callout-warn strong { color: var(--danger); }
+
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .tag-fsr { background: rgba(186, 195, 255, 0.12); color: #bac3ff; }
+
+    @media (max-width: 640px) {
+      .container { padding: 0 14px; }
+      .header { padding: 16px 0 12px; margin-bottom: 20px; }
+      .header-nav { gap: 4px 12px; }
+      .header-badge { font-size: 12px; white-space: nowrap; }
+      .section-title { font-size: 20px; }
+      .accordion-trigger { padding: 14px; font-size: 14px; min-height: 48px; }
+      .accordion-body { padding: 10px 14px 14px; font-size: 13px; }
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo-area">
+        <div class="logo-icon"><svg width="22" height="17" viewBox="0 0 35 27" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.75062 21.7637C9.70661 21.7643 11.6187 22.3247 13.2459 23.3744L15.7569 24.9893C17.383 26.0387 19.2939 26.5992 21.2488 26.6H21.4984C23.4545 26.5998 25.3666 26.0394 26.9937 24.9893L29.5047 23.3744C31.1306 22.3245 33.0416 21.7641 34.9965 21.7637H35V19.3452H23.7537V3.06214e-05H23.6979C23.4511 0.000572626 23.2044 0.00830942 22.9582 0.0232085C22.3841 0.0579629 21.8129 0.131689 21.2488 0.243975C18.8176 0.725271 16.5895 1.89533 14.8481 3.60522C13.1067 5.31511 11.9307 7.4875 11.4698 9.84585C11.0089 12.2042 11.284 14.6419 12.26 16.8485C12.7589 17.9766 13.4295 19.0182 14.244 19.9415C15.0228 20.8243 15.9331 21.5989 16.9506 22.2374C15.782 21.8234 14.6873 21.2436 13.7014 20.5198C13.2148 20.1625 12.7546 19.7701 12.3252 19.3452H0V21.7637H7.75062ZM22.9582 0.807143C22.4371 0.840842 21.9187 0.908842 21.4066 1.01078C19.1275 1.46196 17.0399 2.55864 15.4101 4.15889C13.7805 5.75901 12.6815 7.7903 12.2509 9.99352C11.8204 12.1967 12.0772 14.4741 12.9894 16.5364C13.9017 18.599 15.4228 20.331 17.3785 21.5779C19.3342 22.8248 20.2638 23.1679 21.5815 23.3941C20.2017 23.608 18.5424 23.5704 16.6811 22.9735C14.9311 22.3536 13.3363 21.3836 12.0003 20.1275H0.795455V20.9814H7.75062C9.86069 20.982 11.9247 21.5865 13.6822 22.7202L16.1922 24.3345C17.688 25.2998 19.4481 25.8168 21.2488 25.8177C23.0506 25.8175 25.0606 25.3011 26.5573 24.3352L29.0681 22.7204C30.6037 21.7289 32.3742 21.1419 34.2045 21.0099V20.1275H22.9582V0.807143Z" fill="#FCFCFC"/><path d="M21.4066 1.01078C21.9187 0.908842 22.4371 0.840842 22.9582 0.807143V20.1275H34.2045V21.0099C32.3742 21.1419 30.6037 21.7289 29.0681 22.7204L26.5573 24.3352C25.0606 25.3011 23.0506 25.8175 21.2488 25.8177C19.4481 25.8168 17.688 25.2998 16.1922 24.3345L13.6822 22.7202C11.9247 21.5865 9.86069 20.982 7.75062 20.9814H0.795455V20.1275H12.0003C13.3363 21.3836 14.9311 22.3536 16.6811 22.9735C18.5424 23.5704 20.2017 23.608 21.5815 23.3941C20.2638 23.1679 19.3342 22.8248 17.3785 21.5779C15.4228 20.331 13.9017 18.599 12.9894 16.5364C12.0772 14.4741 11.8204 12.1967 12.2509 9.99352C12.6815 7.7903 13.7805 5.75901 15.4101 4.15889C17.0399 2.55864 19.1275 1.46196 21.4066 1.01078Z" fill="#FCFCFC"/></svg></div>
+        <div class="logo-text">Blackbird <span>Partner Hub</span></div>
+      </a>
+      <nav class="header-nav">
+        <a href="index.html" class="header-badge">Pay Instructions</a>
+        <div class="header-badge active">FAQs</div>
+        <a href="videos.html" class="header-badge">Training Videos</a>
+        <a href="contact.html" class="header-badge header-badge-contact">Contact Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section id="what-is-blackbird" class="collapsible-section open" style="scroll-margin-top: 100px;">
+      <button class="section-header section-header-toggle" onclick="toggleSection(this)">
+        <h2 class="section-title">What is Blackbird?</h2>
+        <svg class="section-chevron" width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="collapsible-body">
+        <div class="collapsible-body-inner">
+          <div class="blackbird-intro">
+            <p>Blackbird is the app for restaurant lovers, offering the richest rewards in dining. Earn points every time you dine and pay with Blackbird, which you can use here or at any spot across the network. The more you dine, the more you unlock, including access to Blackbird Club, Blackbird's loyalty program for the restaurant obsessed.</p>
+            <div class="elevator-pitch">
+              <strong>Elevator pitch:</strong> "We accept Blackbird, an app that rewards you with points for dining out. You can pay in the app and use your points like cash here and at other great restaurants in the Blackbird network."
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <div class="section-header">
+      <div class="section-label">Quick Reference</div>
+      <h1 class="section-title">General FAQs</h1>
+      <p class="section-subtitle">General info and troubleshooting. Payment-specific FAQs appear alongside each POS flow.</p>
+    </div>
+
+    <div class="accordion-group">
+
+      <div class="accordion-section-title">Getting Started</div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">How does guest check-in work?</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>Guests check in by <strong>scanning their phone on the black Blackbird puck</strong> at the host stand (FSR) or register (QSR). They can also check in via GPS through the Blackbird app.</p>
+          <p>Once checked in, the guest's name appears on the <strong>Blackbird Terminal</strong> and they're ready to pay.</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">What is the purple "Industry Puck"?</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>The purple puck is for <strong>employees</strong> — tapping it unlocks <strong>Industry Status</strong> in the Blackbird app, which gives access to exclusive Blackbird-funded perks and rewards designed for restaurant workers.</p>
+          <p>Employees must physically tap the purple puck (GPS check-ins don't work for this).</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">How do I get in touch with Partner Support?</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>Email <a href="mailto:partners@blackbird.xyz">partners@blackbird.xyz</a> or text <strong>(646) 798-9362</strong>. This contact information is for partners only and should not be shared with guests.</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-section-title">Payments</div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">When a guest asks about Blackbird, what do I say?</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>"We accept Blackbird, an app that rewards you with points ($FLY) for dining out. You can pay in the app and use your points like cash here and at other great restaurants in the Blackbird network."</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">The guest doesn't appear under "Open Tabs"</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>First, make sure they've added a valid credit/debit card to their account.</p>
+          <p>Then, ask them to check in again and tap <strong>"Yes"</strong> when prompted to pay with Blackbird.</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">The guest wants to pay with $FLY</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>Make sure they have toggled on <strong>"Pay with $FLY"</strong> from their check settings page. If they accidentally charged their card instead, have them contact <strong>support@blackbird.xyz</strong> for help.</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">The table wants to split a check</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>If everyone is paying with Blackbird, have them tap <strong>Split the Check</strong> — this creates one combined check on the Terminal. If only some are using Blackbird, split the check in your POS. First, close out the non-Blackbird guests, then close out the Blackbird guests.</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">How to pre-authorize a charge</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>This feature lets you place a temporary hold on a guest's payment method for the amount of their order mid-service. This ensures the card is valid and funds are available, giving you confidence the payment will clear when the check is closed.</p>
+          <p>On the Blackbird Terminal:</p>
+          <ul>
+            <li>Tap the guest tab</li>
+            <li>Tap <strong>Pre-Authorize</strong></li>
+            <li>Enter the amount, usually equal to the amount of the guest's order thus far</li>
+            <li>Blackbird attempts to pre-authorize the payment</li>
+            <li>If pre-authorization fails, collect another form of payment outside of Blackbird Pay</li>
+            <li>Blackbird will not honor any payment after a failed pre-authorization</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">How much is $FLY worth?</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>100 $FLY = $1</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">Where can guests spend their $FLY?</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>Guests can spend $FLY at any restaurant in the <strong>Blackbird network</strong>. There are thousands of participating restaurants. To view all locations that accept Blackbird Pay, guests can open the app and tap <strong>Map</strong>.</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">Guest can't check in or has app issues</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <ul>
+            <li>Ask the guest to make sure the app is updated</li>
+            <li>Suggest restarting the app and trying again</li>
+            <li>If issues continue, the guest can contact Blackbird Support through the app or email <strong>support@blackbird.xyz</strong></li>
+          </ul>
+          <div class="callout-warn callout">
+            <strong>Important:</strong> Always collect another form of payment to complete the transaction if the issue isn't resolved quickly.
+          </div>
+        </div></div>
+      </div>
+
+      <div class="accordion-section-title">Terminal Troubleshooting</div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">You don't know your PIN code</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>It defaults to the last 4 digits of the phone number linked to your Blackbird account.</p>
+          <p>If you don't have a Blackbird account, you won't have a PIN — use the manager PIN instead.</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">Logging into Blackbird Device</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>Locked out? Your login credentials are auto-saved. Tap <strong>Log In</strong>, tap into the email field (credentials auto-populate), then <strong>Sign In</strong>. If credentials don't appear, contact <a href="mailto:partners@blackbird.xyz">partners@blackbird.xyz</a> or text <strong>(646) 798-9362</strong>.</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">Device won't charge</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p><strong>1. Confirm power source</strong></p>
+          <ul>
+            <li>The Blackbird Terminal must be plugged directly into a wall outlet.</li>
+            <li>Do not plug it into a POS system, POS printer, or shared USB hub.</li>
+            <li>The Blackbird Terminal may be plugged into a Toast printer once the device is at 100% charge.</li>
+          </ul>
+          <p><strong>2. Check charging connections</strong></p>
+          <ul>
+            <li>Ensure the charging cord is fully seated in the back of the Blackbird Terminal charging stand.</li>
+            <li>Confirm the Blackbird Terminal is sitting upright and securely in the stand.</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">No internet connection</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p><strong>1. Check WiFi strength</strong></p>
+          <ul>
+            <li>Confirm the WiFi network is working properly (test on another device).</li>
+            <li>If needed, reset the router.</li>
+            <li>The Blackbird Terminal cannot connect to public WiFi networks.</li>
+          </ul>
+          <p><strong>2. Connect to a new WiFi network</strong></p>
+          <ul>
+            <li>Swipe up on the Blackbird Terminal screen → Tap the circle at the bottom → Tap the three dots in the top-right corner → Select WiFi and choose the correct network.</li>
+            <li>If you see an "Authentication Failure" message, an incorrect password was entered. Select the network again → Tap <strong>Modify Network</strong> and re-enter the correct password.</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">Blank or black screen</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p><strong>1. Restart the device</strong></p>
+          <ul>
+            <li>Hold the power button (on the side of the device) for 10 seconds.</li>
+            <li>Wait for the device to power back on. A black screen often means the battery is drained or the device is powered off.</li>
+          </ul>
+          <p><strong>2. Check charging position</strong></p>
+          <ul>
+            <li>Make sure the Blackbird Terminal is seated properly in the charging stand.</li>
+            <li>Confirm the stand is plugged into a wall outlet.</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">Can't find the Blackbird screen</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p><strong>1. Confirm Scalefusion is running (newer devices)</strong></p>
+          <ul>
+            <li>If Scalefusion has been exited, the device will show multiple apps instead of the Blackbird screen.</li>
+            <li>Swipe up to access apps, then locate and open the <strong>Scalefusion</strong> app.</li>
+          </ul>
+          <p><strong>2. For older devices</strong></p>
+          <ul>
+            <li>If you see a bird icon, tap it to return to the Blackbird screen.</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">No one knows the PIN</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p><strong>1. About PIN codes</strong></p>
+          <ul>
+            <li>Every employee with a Blackbird account has a unique 4-digit PIN — the last 4 digits of the phone number linked to their Blackbird account.</li>
+          </ul>
+          <p><strong>2. Activating a PIN</strong></p>
+          <ul>
+            <li>Tap your phone to the purple employee puck at your restaurant. Make sure you have the Blackbird app downloaded.</li>
+            <li>This action recognizes you as staff and activates your PIN.</li>
+          </ul>
+          <p><strong>3. If a PIN stops working</strong></p>
+          <ul>
+            <li>Employees must tap the employee puck at least once every 2 weeks.</li>
+            <li>2+ weeks of inactivity will clear industry status.</li>
+            <li>If needed, a manager's PIN can be used temporarily.</li>
+          </ul>
+          <p><strong>4. Viewing or editing PINs</strong></p>
+          <ul>
+            <li>In Back of House, navigate to: <strong>Settings → Staff PIN Management</strong> → Tap the three dots → Select <strong>Reset/Edit PIN</strong>.</li>
+          </ul>
+        </div></div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    function toggleSection(btn) {
+      btn.closest('.collapsible-section').classList.toggle('open');
+    }
+    function toggleAccordion(btn) {
+      const item = btn.closest('.accordion-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.accordion-item.open').forEach(el => el.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blackbird Partner Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Base ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0b0b0b;
+      --surface: #1c1a1f;
+      --surface-hover: #222;
+      --surface-active: #292929;
+      --border: #48454f;
+      --border-hover: #928f99;
+      --text: #fcfcfc;
+      --text-secondary: #ababab;
+      --text-muted: #928f99;
+      --accent: #4C5FF9;
+      --accent-dim: #3a4de0;
+      --accent-bright: #7080fb;
+      --accent-bg: rgba(76, 95, 249, 0.10);
+      --accent-border: rgba(76, 95, 249, 0.25);
+      --success: #2ce198;
+      --success-bg: rgba(44, 225, 152, 0.10);
+      --danger: #ff5449;
+      --danger-bg: rgba(255, 84, 73, 0.08);
+      --brand-yellow: #feea56;
+      --container-low: #1b1b1b;
+      --container: #222222;
+      --container-high: #292929;
+      --container-highest: #343434;
+      --radius: 8px;
+      --radius-sm: 6px;
+      --radius-lg: 12px;
+      --radius-pill: 9999px;
+      --shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+      --shadow-lg: 0 25px 50px -12px rgba(0,0,0,0.25);
+      --transition: 150ms ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── Layout ───────────────────────────────────── */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Header ───────────────────────────────────── */
+    .header {
+      padding: 24px 0 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .header-inner {
+        justify-content: center;
+      }
+      .logo-area {
+        width: 100%;
+        justify-content: center;
+      }
+      .header-nav {
+        justify-content: center;
+      }
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-area:hover, .logo-area:visited {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-text {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-text span {
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-left: 8px;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px 16px;
+      flex-wrap: wrap;
+    }
+
+    .header-badge {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: none;
+      padding: 8px 14px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .header-badge.active {
+      color: #ffffff;
+      background: var(--surface);
+      border: 1px solid var(--accent);
+    }
+
+    a.header-badge:hover {
+      color: var(--text);
+      background: var(--surface);
+      border-color: var(--accent);
+    }
+
+    .header-badge-contact {
+      font-weight: 700;
+      color: var(--brand-yellow);
+      background: rgba(254, 234, 86, 0.12);
+      border: 1px solid rgba(254, 234, 86, 0.3);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+    }
+
+    a.header-badge-contact:hover {
+      color: var(--brand-yellow);
+      background: rgba(254, 234, 86, 0.2);
+      border-color: rgba(254, 234, 86, 0.5);
+    }
+
+    /* ── Section Headers ──────────────────────────── */
+    .section-header {
+      margin-bottom: 24px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-bright);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-top: 8px;
+      max-width: 540px;
+    }
+
+    /* ── POS Grid ─────────────────────────────────── */
+    .pos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    .pos-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border-hover);
+      border-radius: var(--radius);
+      padding: 24px;
+      cursor: pointer;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 80px;
+    }
+
+    .pos-card:hover {
+      background: var(--surface-hover);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .pos-card:active {
+      transform: translateY(0);
+    }
+
+    .pos-card-type {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: inline;
+      margin-bottom: 14px;
+    }
+
+    .pos-card-types {
+      margin-bottom: 14px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .type-fsr {
+      color: #bac3ff;
+    }
+
+    .type-qsr {
+      color: var(--brand-yellow);
+    }
+
+    .type-both {
+      color: var(--accent-bright);
+    }
+
+    .type-separator {
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .pos-card-name {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-align: center;
+      width: 100%;
+    }
+
+    .pos-card-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .pos-card-arrow {
+      position: absolute;
+      top: 50%;
+      right: 24px;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      transition: all var(--transition);
+    }
+
+    .pos-card:hover .pos-card-arrow {
+      color: var(--accent);
+      transform: translateY(-50%) translateX(2px);
+    }
+
+    /* ── Service Type Picker (inline) ─────────────── */
+    .service-type-picker {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 560px;
+      margin-bottom: 56px;
+    }
+
+    .service-type-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border-hover);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: inherit;
+      color: var(--text);
+      text-align: left;
+    }
+
+    .service-type-card:hover {
+      border-color: var(--accent);
+      background: var(--surface-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .service-type-card:active {
+      transform: translateY(0);
+    }
+
+    .service-type-badge {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .service-type-name {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .service-type-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ── Flow View (inline) ─────────────────────── */
+    .flow-view {
+      max-width: 100%;
+      padding-bottom: 64px;
+    }
+
+    .flow-view.has-notes .flow-view-main {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .flow-view-notes {
+      position: sticky;
+      top: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .flow-view-main {
+      position: relative;
+    }
+
+    .flow-view-faq {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .flow-view-faq-title {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-bright);
+      margin-bottom: 16px;
+    }
+
+    .quick-faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .quick-faq-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .quick-faq-q {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      padding: 14px 20px;
+      background: var(--surface);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      user-select: none;
+      transition: background var(--transition);
+    }
+
+    .quick-faq-q:hover { background: var(--surface-hover); }
+
+    .quick-faq-q .qfaq-chevron {
+      flex-shrink: 0;
+      color: var(--text-muted);
+      transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .quick-faq-item.open .quick-faq-q .qfaq-chevron { transform: rotate(180deg); }
+
+    .quick-faq-a {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 300ms cubic-bezier(0.16, 1, 0.3, 1);
+      background: var(--bg);
+    }
+
+    .quick-faq-item.open .quick-faq-a { grid-template-rows: 1fr; }
+
+    .quick-faq-a-inner {
+      overflow: hidden;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      padding: 0 20px;
+    }
+
+    .quick-faq-item.open .quick-faq-a-inner { padding: 12px 20px 14px; }
+
+    .quick-faq-a-inner a {
+      color: var(--accent-bright);
+      text-decoration: none;
+    }
+
+    .quick-faq-a-inner a:hover {
+      text-decoration: underline;
+    }
+
+    .flow-view-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .flow-view-name {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .flow-view-type {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    .flow-columns {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .flow-columns .flow-section {
+      margin-bottom: 0;
+    }
+
+    .flow-section {
+      margin-bottom: 28px;
+    }
+
+    .flow-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .flow-section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+      line-height: 1.4;
+    }
+
+    .flow-section-title .highlight-checkin {
+      background: rgba(44, 225, 152, 0.25);
+      color: var(--text);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .flow-section-title .highlight-closeout {
+      background: rgba(255, 84, 73, 0.25);
+      color: var(--text);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .flow-steps {
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .flow-steps li {
+      counter-increment: step;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--text-secondary);
+    }
+
+    .flow-steps li:last-child {
+      border-bottom: none;
+    }
+
+    .flow-steps li::before {
+      content: counter(step);
+      min-width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .flow-steps li strong {
+      color: var(--text);
+      font-weight: 600;
+      background: var(--container-highest);
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .flow-steps li em {
+      color: var(--text-muted);
+      font-style: normal;
+      font-size: 13px;
+    }
+
+    .flow-steps li.device-label {
+      counter-increment: none;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      padding: 16px 0 2px;
+      border-bottom: none;
+    }
+
+    .flow-steps li.device-label::before {
+      display: none;
+    }
+
+    .flow-note {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 16px;
+    }
+
+    .flow-note strong {
+      color: var(--accent-bright);
+    }
+
+    .flow-note-warn {
+      background: var(--danger-bg);
+      border-color: rgba(255, 84, 73, 0.2);
+    }
+
+    .flow-note-warn strong {
+      color: var(--danger);
+    }
+
+    /* ── Sidebar FAQ Accordions ───────────────────── */
+    .sidebar-faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 6px;
+      overflow: hidden;
+    }
+
+    .sidebar-faq-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .sidebar-faq-q {
+      width: 100%;
+      background: var(--bg);
+      border: none;
+      color: var(--text);
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      transition: background var(--transition);
+      line-height: 1.4;
+    }
+
+    .sidebar-faq-q:hover {
+      background: var(--surface-hover);
+    }
+
+    .sidebar-faq-q .sfaq-chevron {
+      flex-shrink: 0;
+      transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+      color: var(--text-muted);
+    }
+
+    .sidebar-faq-item.open .sidebar-faq-q .sfaq-chevron {
+      transform: rotate(180deg);
+    }
+
+    .sidebar-faq-a {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sidebar-faq-item.open .sidebar-faq-a {
+      grid-template-rows: 1fr;
+    }
+
+    .sidebar-faq-a-inner {
+      overflow: hidden;
+      padding: 0 12px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .sidebar-faq-item.open .sidebar-faq-a-inner {
+      padding: 8px 12px 12px;
+    }
+
+    .sidebar-faq-a-inner a {
+      color: var(--accent-bright);
+      text-decoration: none;
+    }
+
+    .sidebar-faq-a-inner a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Flow Connectors ───────────────────────────── */
+    .flow-connectors {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .flow-connectors path {
+      fill: none;
+      stroke: var(--text-muted);
+      stroke-width: 1.5;
+      opacity: 0.5;
+    }
+
+    .flow-connectors polygon {
+      fill: var(--text-muted);
+      opacity: 0.5;
+    }
+
+    /* ── Flow Footer (support + print) ────────────── */
+    .flow-footer {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .flow-footer-support {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .flow-footer-support a {
+      color: var(--accent-bright);
+      text-decoration: none;
+    }
+
+    .flow-footer-support a:hover {
+      text-decoration: underline;
+    }
+
+    .print-btn {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--accent);
+      background: var(--accent-bg);
+      color: var(--accent-bright);
+      cursor: pointer;
+      transition: all var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .print-btn:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ── What is Blackbird Section ─────────────────── */
+    .blackbird-intro {
+      margin-bottom: 40px;
+    }
+
+    .blackbird-intro-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .blackbird-intro p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .blackbird-intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    .blackbird-intro strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .blackbird-intro .elevator-pitch {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .blackbird-intro .elevator-pitch strong {
+      color: var(--accent-bright);
+    }
+
+    .blackbird-intro .key-fact {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ── Collapsible Sections ────────────────────── */
+    .section-header-toggle {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+      font-family: inherit;
+      padding: 0;
+      margin-bottom: 24px;
+    }
+
+    .section-header-toggle:hover .section-title {
+      color: var(--accent-bright);
+    }
+
+    .section-chevron {
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .collapsible-section:not(.open) .section-chevron {
+      transform: rotate(-90deg);
+    }
+
+    .collapsible-body {
+      display: grid;
+      grid-template-rows: 1fr;
+      transition: grid-template-rows 400ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .collapsible-section:not(.open) .collapsible-body {
+      grid-template-rows: 0fr;
+    }
+
+    .collapsible-body-inner {
+      overflow: hidden;
+    }
+
+    /* ── Divider ──────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 8px 0 48px;
+    }
+
+    /* ── Accordion / FAQ Section ──────────────────── */
+    .accordion-group {
+      margin-bottom: 64px;
+    }
+
+    .accordion-section-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin: 28px 0 12px;
+    }
+
+    .accordion-section-title:first-child {
+      margin-top: 0;
+    }
+
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      overflow: hidden;
+      transition: border-color var(--transition);
+    }
+
+    .accordion-item:hover {
+      border-color: var(--border-hover);
+    }
+
+    .accordion-item.open {
+      border-color: var(--border-hover);
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      background: var(--surface);
+      border: none;
+      color: var(--text);
+      padding: 18px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: background var(--transition);
+    }
+
+    .accordion-trigger:hover {
+      background: var(--surface-hover);
+    }
+
+    .accordion-trigger-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .accordion-chevron {
+      transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+      color: var(--text-muted);
+    }
+
+    .accordion-item.open .accordion-chevron {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 350ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .accordion-item.open .accordion-content {
+      grid-template-rows: 1fr;
+    }
+
+    .accordion-body {
+      overflow: hidden;
+      padding: 12px 20px 20px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .accordion-body p { margin-bottom: 12px; }
+    .accordion-body p:last-child { margin-bottom: 0; }
+    .accordion-body strong { color: var(--text); font-weight: 600; }
+    .accordion-body ul { padding-left: 20px; margin-bottom: 12px; }
+    .accordion-body li { margin-bottom: 6px; }
+
+    .accordion-body .callout {
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+
+    .accordion-body .callout-warn {
+      background: var(--danger-bg);
+      border-color: rgba(255, 84, 73, 0.2);
+    }
+
+    .accordion-body .callout strong { color: var(--accent-bright); }
+    .accordion-body .callout-warn strong { color: var(--danger); }
+
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .tag-fsr { background: rgba(186, 195, 255, 0.12); color: #bac3ff; }
+    .tag-qsr { background: rgba(254, 234, 86, 0.12); color: var(--brand-yellow); }
+
+    /* ── Support Footer ──────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 64px;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: border-color var(--transition);
+    }
+
+    .contact-card:hover { border-color: var(--border-hover); }
+
+    .contact-card-icon {
+      color: var(--accent-bright);
+      margin-bottom: 12px;
+    }
+
+    .contact-card-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .contact-card-value { font-size: 15px; font-weight: 600; }
+    .contact-card-value a { color: var(--accent-bright); text-decoration: none; }
+    .contact-card-value a:hover { color: var(--accent); text-decoration: underline; }
+
+    .contact-card-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* ── Responsive: Tablet ─────────────────────── */
+    @media (max-width: 768px) {
+      .pos-grid { grid-template-columns: repeat(2, 1fr); }
+      .blackbird-intro-content { grid-template-columns: 1fr; }
+    }
+
+    /* ── Responsive: Mobile ──────────────────────── */
+    @media (max-width: 640px) {
+      .container { padding: 0 14px; }
+      .header { padding: 16px 0 12px; margin-bottom: 20px; }
+      .header-nav { gap: 4px 12px; }
+      .header-badge { font-size: 12px; white-space: nowrap; }
+      .logo-icon { width: 34px; height: 34px; }
+      .logo-text { font-size: 16px; }
+      .logo-text span { margin-left: 6px; }
+
+      .section-label { font-size: 10px; margin-bottom: 4px; }
+      .section-title { font-size: 20px; }
+      .section-subtitle { font-size: 13px; margin-top: 6px; }
+
+
+
+      .pos-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 36px; }
+      .pos-card { padding: 14px; }
+      .pos-card-type { font-size: 10px; }
+      .pos-card-types { margin-bottom: 10px; }
+      .pos-card-name { font-size: 17px; margin-bottom: 4px; }
+      .pos-card-desc { display: none; }
+
+      .service-type-picker { grid-template-columns: 1fr; max-width: 100%; }
+      .service-type-card { padding: 20px; }
+      .service-type-name { font-size: 17px; }
+
+      .flow-columns { grid-template-columns: 1fr; }
+      .flow-view.has-notes .flow-view-main { grid-template-columns: 1fr; }
+      .flow-view-notes { position: static; }
+      .flow-view-header { flex-wrap: wrap; gap: 8px; }
+      .flow-view-name { font-size: 21px; }
+      .flow-steps li { padding: 5px 0; font-size: 13px; gap: 10px; }
+      .flow-steps li::before { min-width: 24px; height: 24px; font-size: 11px; }
+      .flow-note { padding: 12px; font-size: 12px; }
+      .flow-section-title { font-size: 14px; }
+      .inline-faq-q { font-size: 13px; }
+      .inline-faq-a { font-size: 12px; }
+      .flow-footer { margin-bottom: 36px; }
+
+      .blackbird-intro { padding: 20px; margin-bottom: 32px; }
+      .blackbird-intro-content { grid-template-columns: 1fr; gap: 16px; }
+
+      .accordion-trigger { padding: 14px; font-size: 14px; min-height: 48px; }
+      .accordion-body { padding: 10px 14px 14px; font-size: 13px; }
+
+      .contact-grid { grid-template-columns: 1fr; margin-bottom: 48px; }
+      .divider { margin: 4px 0 32px; }
+    }
+
+    @media (max-width: 400px) {
+      .container { padding: 0 12px; }
+      .pos-card { padding: 12px; }
+      .pos-card-name { font-size: 15px; }
+      .pos-card-type { font-size: 9px; }
+      .section-title { font-size: 18px; }
+      .accordion-trigger { font-size: 13px; padding: 12px; }
+    }
+
+    /* ── Selection Chain (breadcrumb) ─────────────── */
+    .selection-chain {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .chain-step {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chain-step:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .chain-step.chain-current {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      cursor: default;
+    }
+
+    .chain-step.chain-current:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .chain-arrow {
+      color: var(--text-muted);
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    /* ── View Transitions ─────────────────────────── */
+    @keyframes viewFadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .view-enter {
+      animation: viewFadeIn 350ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Stagger children for the grid */
+    @keyframes cardFadeIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .grid-animate .pos-card {
+      opacity: 0;
+      animation: cardFadeIn 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .grid-animate .pos-card:nth-child(1) { animation-delay: 0ms; }
+    .grid-animate .pos-card:nth-child(2) { animation-delay: 50ms; }
+    .grid-animate .pos-card:nth-child(3) { animation-delay: 100ms; }
+    .grid-animate .pos-card:nth-child(4) { animation-delay: 150ms; }
+    .grid-animate .pos-card:nth-child(5) { animation-delay: 200ms; }
+    .grid-animate .pos-card:nth-child(6) { animation-delay: 250ms; }
+
+    /* Selection feedback on card click */
+    .pos-card.selected {
+      border-color: var(--accent);
+      background: var(--accent-bg);
+      transform: scale(0.97);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    /* Service type picker animation */
+    @keyframes pickerSlideIn {
+      from { opacity: 0; transform: translateX(-12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .picker-animate .service-type-card:nth-child(1) {
+      animation: pickerSlideIn 350ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: 100ms;
+    }
+
+    .picker-animate .service-type-card:nth-child(2) {
+      animation: pickerSlideIn 350ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-delay: 200ms;
+    }
+
+    /* Flow view staggered sections */
+    @keyframes flowSectionIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .flow-animate > * {
+      opacity: 0;
+      animation: flowSectionIn 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .flow-animate > *:nth-child(1) { animation-delay: 0ms; }
+    .flow-animate > *:nth-child(2) { animation-delay: 80ms; }
+    .flow-animate > *:nth-child(3) { animation-delay: 160ms; }
+    .flow-animate > *:nth-child(4) { animation-delay: 240ms; }
+    .flow-animate > *:nth-child(5) { animation-delay: 320ms; }
+    .flow-animate > *:nth-child(6) { animation-delay: 400ms; }
+    .flow-animate > *:nth-child(7) { animation-delay: 480ms; }
+
+    @media (max-width: 640px) {
+      .selection-chain { margin-bottom: 16px; gap: 6px; }
+      .chain-step { font-size: 12px; padding: 5px 10px; }
+    }
+
+    /* ── Scrollbar ────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+  </style>
+</head>
+<body id="top">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo-area" onclick="renderGrid(true); return false;">
+        <div class="logo-icon"><svg width="22" height="17" viewBox="0 0 35 27" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.75062 21.7637C9.70661 21.7643 11.6187 22.3247 13.2459 23.3744L15.7569 24.9893C17.383 26.0387 19.2939 26.5992 21.2488 26.6H21.4984C23.4545 26.5998 25.3666 26.0394 26.9937 24.9893L29.5047 23.3744C31.1306 22.3245 33.0416 21.7641 34.9965 21.7637H35V19.3452H23.7537V3.06214e-05H23.6979C23.4511 0.000572626 23.2044 0.00830942 22.9582 0.0232085C22.3841 0.0579629 21.8129 0.131689 21.2488 0.243975C18.8176 0.725271 16.5895 1.89533 14.8481 3.60522C13.1067 5.31511 11.9307 7.4875 11.4698 9.84585C11.0089 12.2042 11.284 14.6419 12.26 16.8485C12.7589 17.9766 13.4295 19.0182 14.244 19.9415C15.0228 20.8243 15.9331 21.5989 16.9506 22.2374C15.782 21.8234 14.6873 21.2436 13.7014 20.5198C13.2148 20.1625 12.7546 19.7701 12.3252 19.3452H0V21.7637H7.75062ZM22.9582 0.807143C22.4371 0.840842 21.9187 0.908842 21.4066 1.01078C19.1275 1.46196 17.0399 2.55864 15.4101 4.15889C13.7805 5.75901 12.6815 7.7903 12.2509 9.99352C11.8204 12.1967 12.0772 14.4741 12.9894 16.5364C13.9017 18.599 15.4228 20.331 17.3785 21.5779C19.3342 22.8248 20.2638 23.1679 21.5815 23.3941C20.2017 23.608 18.5424 23.5704 16.6811 22.9735C14.9311 22.3536 13.3363 21.3836 12.0003 20.1275H0.795455V20.9814H7.75062C9.86069 20.982 11.9247 21.5865 13.6822 22.7202L16.1922 24.3345C17.688 25.2998 19.4481 25.8168 21.2488 25.8177C23.0506 25.8175 25.0606 25.3011 26.5573 24.3352L29.0681 22.7204C30.6037 21.7289 32.3742 21.1419 34.2045 21.0099V20.1275H22.9582V0.807143Z" fill="#FCFCFC"/><path d="M21.4066 1.01078C21.9187 0.908842 22.4371 0.840842 22.9582 0.807143V20.1275H34.2045V21.0099C32.3742 21.1419 30.6037 21.7289 29.0681 22.7204L26.5573 24.3352C25.0606 25.3011 23.0506 25.8175 21.2488 25.8177C19.4481 25.8168 17.688 25.2998 16.1922 24.3345L13.6822 22.7202C11.9247 21.5865 9.86069 20.982 7.75062 20.9814H0.795455V20.1275H12.0003C13.3363 21.3836 14.9311 22.3536 16.6811 22.9735C18.5424 23.5704 20.2017 23.608 21.5815 23.3941C20.2638 23.1679 19.3342 22.8248 17.3785 21.5779C15.4228 20.331 13.9017 18.599 12.9894 16.5364C12.0772 14.4741 11.8204 12.1967 12.2509 9.99352C12.6815 7.7903 13.7805 5.75901 15.4101 4.15889C17.0399 2.55864 19.1275 1.46196 21.4066 1.01078Z" fill="#FCFCFC"/></svg></div>
+        <div class="logo-text">Blackbird <span>Partner Hub</span></div>
+      </a>
+      <nav class="header-nav">
+        <a href="#top" class="header-badge active">How It Works</a>
+        <a href="faq.html" class="header-badge">FAQs</a>
+        <a href="videos.html" class="header-badge">Training Videos</a>
+        <a href="contact.html" class="header-badge header-badge-contact">Contact Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ═══ POS SECTION (swaps between grid / picker / flow) ═══ -->
+    <section id="pos-section" style="scroll-margin-top: 100px;">
+      <div class="section-header">
+        <div class="section-label">Payment Flows</div>
+        <h1 class="section-title">Choose your POS system</h1>
+        <p class="section-subtitle">Select your POS system to view step-by-step payment instructions.</p>
+      </div>
+      <div id="pos-chain"></div>
+      <div id="pos-content">
+        <!-- JS renders the current view here -->
+      </div>
+    </section>
+
+
+
+  </main>
+
+  <script>
+    // ── POS Flow Data (from Figma training cards) ──
+    // Steps prefixed with @ are device sub-headers (not numbered)
+    const posData = {
+      'toast-fsr': {
+        name: 'Toast', type: 'Full Service Restaurant', typeClass: 'type-fsr',
+        checkinHeader: 'When a guest checks in, assign a table/check number',
+        checkin: [
+          'Tap the table icon <span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px 2px 5px;border:1.5px solid #48454f;border-radius:6px;font-size:12px;font-weight:500;color:#ababab;vertical-align:middle;margin-left:2px"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;color:#907eff"><rect x="1" y="3" width="16" height="3" rx="1" fill="currentColor"/><rect x="3" y="6" width="2.5" height="8" rx="1" fill="currentColor"/><rect x="12.5" y="6" width="2.5" height="8" rx="1" fill="currentColor"/></svg>?</span>',
+          'Add check and table number',
+          'Tap <strong>Enter</strong>'
+        ],
+        closeoutHeader: 'When a guest is ready to close out',
+        closeout: [
+          'Drop Itemized Receipt',
+          '@On Blackbird Terminal',
+          'Tap the guest tab',
+          'Enter the <strong>Balance Due</strong> from Toast',
+          'Tap <strong>Charge</strong>',
+          'Blackbird authorizes the payment and charges the guest',
+          'Blackbird calculates the <strong>Tip</strong>',
+          '@On Toast POS',
+          'Tap <strong>Pay</strong>',
+          'Enter the <strong>Tip</strong> into the tip box',
+          'Close check to <strong>Blackbird Pay</strong> tender type',
+          '@On Blackbird Terminal',
+          'Tap <strong>Done</strong>',
+          'Tell the guest they are good to go'
+        ],
+        notes: []
+      },
+      'toast-qsr': {
+        name: 'Toast', type: 'Quick Service Restaurant', typeClass: 'type-qsr',
+        flow: [
+          '@On Blackbird Terminal',
+          'After the guest checks in, their name appears with a unique 6-digit code: <strong>BBXXXX</strong> (e.g. BB1234)',
+          '@On Toast POS',
+          'Rename the tab name to <strong>BBXXXX</strong>, the unique code for this guest',
+          'Place order as usual on Toast',
+          'Close to <strong>Blackbird Pay</strong> tender type',
+          'The guest tips as usual on Toast',
+          '@On Blackbird Terminal',
+          'Click <strong>Confirm</strong> to close'
+        ],
+        notes: [
+          { text: '<strong>The 6-digit code must be entered correctly</strong> for your restaurant to get paid.', type: 'warn' },
+          { text: 'Optional: Add the guest\'s name before or after the code, e.g. <strong>Ally BB1234</strong> or <strong>BB1234 Ally</strong>', type: 'info' },
+          { text: 'Each code is <strong>one-time use</strong>. If the guest places another order, they need a new check-in for a new code.', type: 'info' }
+        ]
+      },
+      'square-fsr': {
+        name: 'Square', type: 'Full Service Restaurant', typeClass: 'type-fsr',
+        checkinHeader: 'When a guest checks in, assign a table/check number',
+        checkin: [
+          'Tap the table icon <span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px 2px 5px;border:1.5px solid #48454f;border-radius:6px;font-size:12px;font-weight:500;color:#ababab;vertical-align:middle;margin-left:2px"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;color:#907eff"><rect x="1" y="3" width="16" height="3" rx="1" fill="currentColor"/><rect x="3" y="6" width="2.5" height="8" rx="1" fill="currentColor"/><rect x="12.5" y="6" width="2.5" height="8" rx="1" fill="currentColor"/></svg>?</span>',
+          'Add check and table number',
+          'Tap <strong>Enter</strong>'
+        ],
+        closeoutHeader: 'When a guest is ready to close out',
+        closeout: [
+          'Drop Itemized Receipt',
+          '@On Blackbird Terminal',
+          'Tap the guest tab',
+          'Enter the <strong>Balance Due</strong> from Square',
+          'Tap <strong>Charge</strong>',
+          'Blackbird authorizes the payment and charges the guest',
+          'Blackbird calculates the <strong data-removed>Tip</strong>',
+          '@On Square POS',
+          'Tap <strong>Charge</strong>',
+          'Tap <strong>House account</strong> &rarr; <strong>Blackbird Pay</strong> &rarr; <strong>Charge</strong>',
+          'Tap <strong>Custom</strong> box and enter <strong data-removed>Tip</strong>',
+          '@On Blackbird Terminal',
+          'Tap <strong>Done</strong>',
+          'Tell the guest they are good to go'
+        ],
+        notes: []
+      },
+      'square-qsr': {
+        name: 'Square', type: 'Quick Service Restaurant', typeClass: 'type-qsr',
+        flow: [
+          '@On Blackbird Terminal',
+          'Guest checks in and their name appears',
+          '@On Square POS',
+          'Enter order, as usual',
+          'Tap <strong>Charge</strong>',
+          'Tap <strong>House Account</strong> &rarr; <strong>Blackbird Pay</strong> &rarr; <strong>Charge</strong> &rarr; <strong>Confirm</strong>',
+          'The guest tips as usual on Square',
+          '@On Blackbird Terminal',
+          'Tap on the <strong>Guest\'s Name</strong>',
+          'Find and <strong>Select</strong> their order (orders shown newest to oldest)',
+          'Tap <strong>Confirm</strong>'
+        ],
+        notes: [
+          { text: 'Square QSR does <strong>not</strong> use the BBXXXX code system. You manually match the guest name on the Terminal to their Square order.', type: 'info' },
+          { text: 'If the order is not visible on the Terminal, <strong>pull down on the screen to refresh</strong>.', type: 'info' }
+        ]
+      },
+      'aloha-fsr': {
+        name: 'Aloha', type: 'Full Service Restaurant', typeClass: 'type-fsr',
+        checkinHeader: 'When a guest checks in, assign a table/check number',
+        checkin: [
+          'Tap the table icon <span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px 2px 5px;border:1.5px solid #48454f;border-radius:6px;font-size:12px;font-weight:500;color:#ababab;vertical-align:middle;margin-left:2px"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;color:#907eff"><rect x="1" y="3" width="16" height="3" rx="1" fill="currentColor"/><rect x="3" y="6" width="2.5" height="8" rx="1" fill="currentColor"/><rect x="12.5" y="6" width="2.5" height="8" rx="1" fill="currentColor"/></svg>?</span>',
+          'Add check and table number',
+          'Tap <strong>Enter</strong>'
+        ],
+        closeoutHeader: 'When a guest is ready to close out',
+        closeout: [
+          'Drop Itemized Receipt',
+          '@On Blackbird Terminal',
+          'Tap the guest tab',
+          'Enter the <strong>Balance Due</strong> from Aloha',
+          'Tap <strong>Charge</strong>',
+          'Blackbird authorizes the payment and charges the guest',
+          'Blackbird calculates the <strong data-removed>Tip</strong>',
+          '@On Aloha POS',
+          'Tap <strong>Close</strong> &rarr; <strong>Blackbird Pay</strong>',
+          'Hit OK &rarr; enter <strong data-removed>Tip</strong> &rarr; Hit <strong>OK</strong> &rarr; <strong>Close</strong>',
+          '@On Blackbird Terminal',
+          'Tap <strong>Done</strong>',
+          'Tell the guest they are good to go'
+        ],
+        notes: []
+      },
+      'micros-fsr': {
+        name: 'Micros', type: 'Full Service Restaurant', typeClass: 'type-fsr',
+        checkinHeader: 'When a guest checks in, assign a table/check number',
+        checkin: [
+          'Tap the table icon <span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px 2px 5px;border:1.5px solid #48454f;border-radius:6px;font-size:12px;font-weight:500;color:#ababab;vertical-align:middle;margin-left:2px"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;color:#907eff"><rect x="1" y="3" width="16" height="3" rx="1" fill="currentColor"/><rect x="3" y="6" width="2.5" height="8" rx="1" fill="currentColor"/><rect x="12.5" y="6" width="2.5" height="8" rx="1" fill="currentColor"/></svg>?</span>',
+          'Add check and table number',
+          'Tap <strong>Enter</strong>'
+        ],
+        closeoutHeader: 'When a guest is ready to close out',
+        closeout: [
+          'Drop Itemized Receipt',
+          '@On Blackbird Terminal',
+          'Tap the guest tab',
+          'Enter the <strong>Balance Due</strong> from Micros',
+          'Tap <strong>Charge</strong>',
+          'Blackbird authorizes the payment and charges the guest',
+          'Blackbird calculates the <strong>Tip</strong> and <strong data-removed>Grand Total</strong>. Do NOT tap "Done" yet.',
+          '@On Micros POS',
+          'Tap <strong>Other Payments</strong>',
+          'Enter <strong data-removed>Grand Total</strong> from Blackbird Terminal',
+          'Close check to <strong>Blackbird Pay</strong> tender type &rarr; <strong>Yes</strong>',
+          '@On Blackbird Terminal',
+          'Tap <strong>Done</strong>',
+          'Tell the guest they are good to go'
+        ],
+        notes: [
+          { text: 'Micros requires the <strong>Grand Total</strong> (balance + tip combined), not just the tip separately. The Blackbird Terminal calculates this for you.', type: 'warn' }
+        ]
+      },
+      'lightspeed-fsr': {
+        name: 'Lightspeed', type: 'Full Service Restaurant', typeClass: 'type-fsr',
+        checkinHeader: 'When a guest checks in, assign a table/check number',
+        checkin: [
+          'Tap the table icon <span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px 2px 5px;border:1.5px solid #48454f;border-radius:6px;font-size:12px;font-weight:500;color:#ababab;vertical-align:middle;margin-left:2px"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;color:#907eff"><rect x="1" y="3" width="16" height="3" rx="1" fill="currentColor"/><rect x="3" y="6" width="2.5" height="8" rx="1" fill="currentColor"/><rect x="12.5" y="6" width="2.5" height="8" rx="1" fill="currentColor"/></svg>?</span>',
+          'Add check and table number',
+          'Tap <strong>Enter</strong>'
+        ],
+        closeoutHeader: 'When a guest is ready to close out',
+        closeout: [
+          'Drop Itemized Receipt',
+          '@On Blackbird Terminal',
+          'Tap the guest tab',
+          'Enter the <strong>Balance Due</strong> from Lightspeed',
+          'Tap <strong>Charge</strong>',
+          'Blackbird authorizes the payment and charges the guest',
+          'Blackbird calculates the <strong data-removed>Tip</strong>. Do NOT tap "Done" yet.',
+          '@On Lightspeed POS',
+          'Close check to <strong>Blackbird Pay</strong> &rarr; <strong>Apply Payment</strong>',
+          'Tap <strong>Apply Tips</strong> &rarr; find correct server &amp; check',
+          'Add <strong data-removed>Tip</strong> from Blackbird Terminal',
+          '@On Blackbird Terminal',
+          'Tap <strong>Done</strong>',
+          'Tell the guest they are good to go'
+        ],
+        notes: []
+      },
+      'spoton-fsr': {
+        name: 'SpotOn', type: 'Full Service Restaurant', typeClass: 'type-fsr',
+        checkinHeader: 'When a guest checks in, assign a table/check number',
+        checkin: [
+          'Tap the table icon <span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px 2px 5px;border:1.5px solid #48454f;border-radius:6px;font-size:12px;font-weight:500;color:#ababab;vertical-align:middle;margin-left:2px"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;color:#907eff"><rect x="1" y="3" width="16" height="3" rx="1" fill="currentColor"/><rect x="3" y="6" width="2.5" height="8" rx="1" fill="currentColor"/><rect x="12.5" y="6" width="2.5" height="8" rx="1" fill="currentColor"/></svg>?</span>',
+          'Add check and table number',
+          'Tap <strong>Enter</strong>'
+        ],
+        closeoutHeader: 'When a guest is ready to close out',
+        closeout: [
+          'Drop Itemized Receipt',
+          '@On Blackbird Terminal',
+          'Tap the guest tab',
+          'Enter the <strong>Balance Due</strong> from SpotOn',
+          'Tap <strong>Charge</strong>',
+          'Blackbird authorizes the payment and charges the guest',
+          '<span style="white-space:nowrap">Blackbird calculates the <b>Tip</b> &amp; <b>Grand Total</b>.</span><br>Do not tap <strong>Done</strong> yet.',
+          '@On SpotOn POS',
+          'Tap <strong>Take Payment</strong>',
+          'Select <strong>Blackbird Pay</strong> tender type',
+          'Enter the <strong>Grand Total</strong> from Blackbird Terminal',
+          'Select <strong>Blackbird Pay</strong> tender type again, then tap <strong>Done</strong>',
+          '@On Blackbird Terminal',
+          'Tap <strong>Done</strong>',
+          'Tell the guest they are good to go'
+        ],
+        notes: [
+          { text: 'Like Micros, SpotOn requires the <strong>Grand Total</strong> (balance + tip combined). The Blackbird Terminal calculates this for you.', type: 'warn' }
+        ]
+      }
+    };
+
+    // ── POS-Specific FAQ Data (from Figma training cards) ──
+    // Full FAQ data from Figma back cards — shown in sidebar next to flow
+    const posFAQs = {
+      'fsr': [
+        { q: 'The table wants to split a check', a: 'If everyone is paying with Blackbird, have them tap <strong>Split the Check</strong> — this creates one combined check on the Terminal. If only some are using Blackbird, split the check in your POS. First, close out the non-Blackbird guests, then close out the Blackbird guests.' },
+        { q: 'You are logged out of the Blackbird Terminal', a: 'Your login credentials are auto-saved. To access: Tap <strong>Log In</strong> &rarr; Tap into the <strong>Email address</strong> field &rarr; Tap <strong>Sign In</strong>.' },
+        { q: 'Your restaurant has an auto-gratuity policy', a: 'Auto-gratuity is already added to the check. Remind guests to set their in-app tip to 0% if they don\'t want to add an additional tip.' },
+        { q: 'How to pre-authorize a charge', a: 'This feature lets you place a temporary hold on a guest\'s payment method for the amount of their order mid-service. This ensures the card is valid and funds are available, giving you confidence the payment will clear when the check is closed.<br><br><strong>On the Blackbird Terminal:</strong><ol style="margin:8px 0 0 16px"><li>Tap the guest tab</li><li>Tap <strong>Pre-Authorize</strong></li><li>Enter the amount, usually equal to the amount of the guest\'s order thus far</li><li>Blackbird attempts to pre-authorize the payment</li><li>If pre-authorization fails, <strong>collect another form of payment outside of Blackbird Pay</strong><br><em style="font-style:italic;opacity:0.8">Blackbird will not honor any payment after a failed pre-authorization</em></li></ol>' }
+      ],
+      'toast-qsr': [
+        { q: 'Do I need to do anything after entering the 6-digit code?', a: 'Yes — tap <strong>Confirm</strong> once the order is complete to clear from the open tab queue.' },
+        { q: 'Can a code be used more than once?', a: 'No. Each code is one-time use. If the guest places another order, they\'ll need to check in again and you will see a new code for use.' },
+        { q: 'Why doesn\'t the guest see a charge or $FLY deduction yet?', a: 'Payments can take up to 24 hours to process and appear on their end.' },
+        { q: 'Can I add a guest\'s name before or after the 6-digit code?', a: 'Yes. You may add the name (or other order notes) before or after the code, as long as there\'s a space before or after BBXXXX.' }
+      ],
+      'square-qsr': [
+        { q: 'The guest name/order is not showing on the Blackbird Terminal', a: 'Pull down on the screen to refresh.' }
+      ]
+    };
+
+    // ── Card PDF file mapping ──────────────────────
+    const cardPDFs = {
+      'toast-fsr': 'FSR - Toast - 5x7.pdf',
+      'toast-qsr': 'QSR - Toast - 4x6.pdf',
+      'square-fsr': 'FSR - Square - 5x7.pdf',
+      'square-qsr': 'QSR - Square - 4x6 - Front.pdf',
+      'aloha-fsr': 'FSR - Aloha - 5x7.pdf',
+      'micros-fsr': 'FSR - Micros - 5x7.pdf',
+      'lightspeed-fsr': 'FSR - Lightspeed - 5x7.pdf',
+      'spoton-fsr': 'FSR - SpotOn - 5x7.pdf'
+    };
+
+    // ── POS card definitions for the grid ─────────
+    const posCards = [
+      { id: 'toast', name: 'Toast', hasQSR: true, typeLabel: 'Full Service & Quick Service', typeClass: 'type-both', desc: 'Payment flows for both full-service and quick-service restaurants using Toast POS.' },
+      { id: 'square', name: 'Square', hasQSR: true, typeLabel: 'Full Service & Quick Service', typeClass: 'type-both', desc: 'Payment flows for both full-service and quick-service restaurants using Square POS.' },
+      { id: 'aloha', name: 'Aloha', hasQSR: false, typeLabel: 'Full Service', typeClass: 'type-fsr', desc: 'Close to Blackbird Pay tender type, then enter tip and close in Aloha.' },
+      { id: 'micros', name: 'Micros', hasQSR: false, typeLabel: 'Full Service', typeClass: 'type-fsr', desc: 'Enter grand total (balance + tip) into Other Payments, close to Blackbird Pay.' },
+      { id: 'lightspeed', name: 'Lightspeed', hasQSR: false, typeLabel: 'Full Service', typeClass: 'type-fsr', desc: 'Confirm Payment path with Blackbird Pay tender and separate tip entry.' },
+      { id: 'spoton', name: 'SpotOn', hasQSR: false, typeLabel: 'Full Service', typeClass: 'type-fsr', desc: 'Take Payment path — enter grand total to Blackbird tender, then Done.' }
+    ];
+
+    // ── View state ────────────────────────────────
+    const container = document.getElementById('pos-content');
+    const chainEl = document.getElementById('pos-chain');
+
+    function renderChain(steps) {
+      // steps: array of { label, onclick } — last one is current (not clickable)
+      if (!steps || steps.length === 0) {
+        chainEl.innerHTML = '';
+        return;
+      }
+      let html = '<div class="selection-chain">';
+      steps.forEach((step, i) => {
+        const isLast = i === steps.length - 1;
+        if (isLast) {
+          html += `<span class="chain-step chain-current">${step.label}</span>`;
+        } else {
+          html += `<button class="chain-step" onclick="${step.onclick}">${step.label}</button>`;
+          html += '<span class="chain-arrow">&rarr;</span>';
+        }
+      });
+      html += '</div>';
+      chainEl.innerHTML = html;
+    }
+
+    function renderGrid(animate) {
+      renderChain([]);
+      const shouldAnimate = animate !== false;
+      let html = '';
+      html += `<div class="pos-grid ${shouldAnimate ? 'grid-animate' : ''}">`;
+      posCards.forEach(card => {
+        html += `<div class="pos-card" onclick="selectPOS(this, '${card.id}')">`;
+        html += `<div class="pos-card-name">${card.name}</div>`;
+        html += '<div class="pos-card-arrow">&rarr;</div>';
+        html += '</div>';
+      });
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    function selectPOS(el, posName) {
+      const card = posCards.find(c => c.id === posName);
+      if (!card) return;
+
+      // Visual feedback: highlight the clicked card
+      el.classList.add('selected');
+
+      // Brief delay so the user sees their selection, then transition
+      setTimeout(() => {
+        if (card.hasQSR) {
+          renderServicePicker(posName, card.name);
+        } else {
+          renderFlow(posName + '-fsr');
+        }
+        }, 180);
+    }
+
+    function renderServicePicker(posName, displayName) {
+      renderChain([
+        { label: 'All POS Systems', onclick: 'renderGrid(true)' },
+        { label: displayName }
+      ]);
+
+      let html = '';
+      html += `<div class="service-type-picker picker-animate">`;
+      html += `<button class="service-type-card" onclick="renderFlow('${posName}-fsr')">`;
+      html += '<div class="service-type-name">Full Service</div>';
+      html += '<div class="service-type-desc">Table service with check-in and close-out flow.</div>';
+      html += '</button>';
+      html += `<button class="service-type-card" onclick="renderFlow('${posName}-qsr')">`;
+      html += '<div class="service-type-name">Quick Service</div>';
+      html += '<div class="service-type-desc">Counter service with code-based or order-matching flow.</div>';
+      html += '</button>';
+      html += '</div>';
+
+      container.innerHTML = html;
+    }
+
+    function renderFlow(posId) {
+      const data = posData[posId];
+      if (!data) return;
+
+      const posName = posId.split('-')[0];
+      const displayName = data.name;
+      const hasQSR = posCards.find(c => c.id === posName)?.hasQSR;
+      const isQSR = posId.endsWith('-qsr');
+      const serviceLabel = isQSR ? 'Quick Service' : 'Full Service';
+
+      const steps = [{ label: 'All POS Systems', onclick: 'renderGrid(true)' }];
+      if (hasQSR) {
+        steps.push({ label: displayName, onclick: `renderServicePicker('${posName}', '${displayName}')` });
+        steps.push({ label: serviceLabel });
+      } else {
+        steps.push({ label: displayName });
+      }
+      renderChain(steps);
+
+      let html = '';
+
+      // Helper: render steps with @ device headers
+      function renderSteps(steps) {
+        return steps.map(s => {
+          if (typeof s === 'string' && s.startsWith('@')) {
+            return `<li class="device-label">${s.substring(1)}</li>`;
+          }
+          return `<li>${s}</li>`;
+        }).join('');
+      }
+
+      const hasNotes = data.notes && data.notes.length;
+      html += `<div class="flow-view ${hasNotes ? 'has-notes' : ''} flow-animate">`;
+
+      html += '<div class="flow-view-main">';
+
+      // Flow steps column
+      html += '<div>';
+      html += '<div class="flow-view-header">';
+      html += `<h1 class="flow-view-name">${data.name}</h1>`;
+      html += `<span class="flow-view-type ${data.typeClass}">${data.type}</span>`;
+      html += '</div>';
+
+      if (data.checkin) {
+        html += '<div class="flow-columns">';
+        html += '<div class="flow-section">';
+        html += '<div class="flow-section-title">When a guest <span class="highlight-checkin">checks in</span>, assign a table/check number</div>';
+        html += '<ol class="flow-steps">' + renderSteps(data.checkin) + '</ol>';
+        html += '</div>';
+        html += '<div class="flow-section">';
+        html += '<div class="flow-section-title">When a guest is <span class="highlight-closeout">ready to close out</span></div>';
+        html += '<ol class="flow-steps">' + renderSteps(data.closeout) + '</ol>';
+        html += '</div>';
+        html += '</div>';
+      } else if (data.flow) {
+        html += '<div class="flow-section">';
+        html += '<div class="flow-section-title">Payment Flow</div>';
+        html += '<ol class="flow-steps">' + renderSteps(data.flow) + '</ol>';
+        html += '</div>';
+      }
+      html += '</div>';
+
+      // Notes column (right side if present)
+      if (hasNotes) {
+        html += '<div class="flow-view-notes">';
+        data.notes.forEach(n => {
+          const cls = n.type === 'warn' ? 'flow-note flow-note-warn' : 'flow-note';
+          html += `<div class="${cls}">${n.text}</div>`;
+        });
+        html += '</div>';
+      }
+
+      html += '</div>'; // .flow-view-main
+
+      // Print Card button
+      const cardFile = cardPDFs[posId];
+      if (cardFile) {
+        html += '<div class="flow-footer">';
+        html += `<a class="print-btn" href="source%20materials/cards/${encodeURIComponent(cardFile)}" target="_blank"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 6V1h8v5M4 12H2.5A1.5 1.5 0 011 10.5v-4A1.5 1.5 0 012.5 5h11A1.5 1.5 0 0115 6.5v4a1.5 1.5 0 01-1.5 1.5H12M4 9h8v6H4V9z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Print Card</a>`;
+        html += '</div>';
+      }
+
+      // Quick FAQs below the flow — styled like General FAQ accordions
+      const faqKey = posId.endsWith('-qsr') ? posId : 'fsr';
+      const faqs = posFAQs[faqKey] || posFAQs['fsr'];
+      if (faqs && faqs.length) {
+        html += '<div class="flow-view-faq">';
+        html += '<div class="flow-view-faq-title">Quick FAQs</div>';
+        faqs.forEach(faq => {
+          html += '<div class="quick-faq-item">';
+          html += `<div class="quick-faq-q" onclick="toggleQuickFaq(this)">${faq.q}<svg class="qfaq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>`;
+          html += `<div class="quick-faq-a"><div class="quick-faq-a-inner">${faq.a}</div></div>`;
+          html += '</div>';
+        });
+        html += '</div>';
+      }
+
+      html += '</div>'; // .flow-view-main
+      html += '</div>'; // .flow-view
+      container.innerHTML = html;
+
+      // Draw connectors after a brief delay for animations to settle
+      requestAnimationFrame(() => requestAnimationFrame(drawConnectors));
+    }
+
+    // ── Flow Connectors ──────────────────────────
+    function drawConnectors() {
+      // Remove any existing connector SVG
+      document.querySelectorAll('.flow-connectors').forEach(el => el.remove());
+
+      const main = container.querySelector('.flow-view-main');
+      if (!main) return;
+
+      const froms = main.querySelectorAll('[data-cf]');
+      if (!froms.length) return;
+
+      const mainRect = main.getBoundingClientRect();
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.classList.add('flow-connectors');
+      svg.setAttribute('width', mainRect.width);
+      svg.setAttribute('height', mainRect.height);
+      main.appendChild(svg);
+
+      froms.forEach(from => {
+        const id = from.dataset.cf;
+        const to = main.querySelector(`[data-ct="${id}"]`);
+        if (!to) return;
+
+        const fRect = from.getBoundingClientRect();
+        const tRect = to.getBoundingClientRect();
+
+        // Positions relative to .flow-view-main
+        const x1 = fRect.right - mainRect.left + 4;
+        const y1 = fRect.top + fRect.height / 2 - mainRect.top;
+        const x2 = tRect.right - mainRect.left + 4;
+        const y2 = tRect.top + tRect.height / 2 - mainRect.top;
+
+        // Bow out to the right
+        const bow = 28;
+        const midY = (y1 + y2) / 2;
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', `M ${x1} ${y1} C ${x1 + bow} ${y1}, ${x2 + bow} ${y2}, ${x2} ${y2}`);
+        svg.appendChild(path);
+
+        // Arrowhead
+        const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        const ax = x2;
+        const ay = y2;
+        arrow.setAttribute('points', `${ax+6},${ay} ${ax+12},${ay-3.5} ${ax+12},${ay+3.5}`);
+        svg.appendChild(arrow);
+      });
+    }
+
+    // Redraw on resize
+    window.addEventListener('resize', () => {
+      if (container.querySelector('.flow-view-main')) drawConnectors();
+    });
+
+    // ── Collapsible Section Logic ─────────────────
+    function toggleSection(btn) {
+      btn.closest('.collapsible-section').classList.toggle('open');
+    }
+
+    // ── Quick FAQ Accordion ──────────────────────
+    function toggleQuickFaq(el) {
+      const item = el.closest('.quick-faq-item');
+      const wasOpen = item.classList.contains('open');
+      item.closest('.flow-view-faq').querySelectorAll('.quick-faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // ── Accordion Logic ──────────────────────────
+    function toggleSidebarFaq(btn) {
+      const item = btn.closest('.accordion-item');
+      const wasOpen = item.classList.contains('open');
+      item.closest('.flow-view-faq').querySelectorAll('.accordion-item.open').forEach(el => el.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    function toggleAccordion(btn) {
+      const item = btn.closest('.accordion-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.accordion-item.open').forEach(el => el.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // ── Keyboard shortcuts ───────────────────────
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') renderGrid(true);
+    });
+
+    // ── Deep Link Support ────────────────────────
+    (function initDeepLink() {
+      let params = new URLSearchParams(window.location.search);
+      if (!params.get('pos') && window.location.hash.length > 1) {
+        params = new URLSearchParams(window.location.hash.substring(1));
+      }
+      const pos = params.get('pos');
+      const cohort = params.get('cohort');
+      const sidecar = params.get('sidecar');
+
+      if (!pos) { renderGrid(false); return; }
+
+      const posLower = pos.toLowerCase();
+      const isQSR = cohort === 'BB2' || (sidecar || '').toUpperCase() === 'QSR';
+      const serviceType = isQSR ? 'qsr' : 'fsr';
+
+      if ((posLower === 'toast' || posLower === 'square') && posData[posLower + '-' + serviceType]) {
+        renderFlow(posLower + '-' + serviceType);
+      } else {
+        const otherMap = { aloha: 'aloha-fsr', micros: 'micros-fsr', lightspeed: 'lightspeed-fsr', spoton: 'spoton-fsr' };
+        const posId = otherMap[posLower];
+        if (posId && posData[posId]) { renderFlow(posId); }
+        else { renderGrid(); }
+      }
+    })();
+  </script>
+
+</body>
+</html>
