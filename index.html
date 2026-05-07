@@ -566,6 +566,11 @@
       white-space: nowrap;
     }
 
+    .flow-steps li strong[data-removed] {
+      background: #ffffff;
+      color: #000000;
+    }
+
     .flow-steps li em {
       color: var(--text-muted);
       font-style: normal;
@@ -1284,13 +1289,13 @@
           'Drop Itemized Receipt',
           '@On Blackbird Terminal',
           'Tap the guest tab',
-          'Enter the <strong>Balance Due</strong> from Toast',
+          'Enter the <strong data-removed>Balance Due</strong> from Toast',
           'Tap <strong>Charge</strong>',
           'Blackbird authorizes the payment and charges the guest',
-          'Blackbird calculates the <strong>Tip</strong>',
+          'Blackbird calculates the <strong data-removed>Tip</strong>',
           '@On Toast POS',
           'Tap <strong>Pay</strong>',
-          'Enter the <strong>Tip</strong> into the tip box',
+          'Enter the <strong data-removed>Tip</strong> into the tip box',
           'Close check to <strong>Blackbird Pay</strong> tender type',
           '@On Blackbird Terminal',
           'Tap <strong>Done</strong>',
@@ -1330,7 +1335,7 @@
           'Drop Itemized Receipt',
           '@On Blackbird Terminal',
           'Tap the guest tab',
-          'Enter the <strong>Balance Due</strong> from Square',
+          'Enter the <strong data-removed>Balance Due</strong> from Square',
           'Tap <strong>Charge</strong>',
           'Blackbird authorizes the payment and charges the guest',
           'Blackbird calculates the <strong data-removed>Tip</strong>',
@@ -1377,7 +1382,7 @@
           'Drop Itemized Receipt',
           '@On Blackbird Terminal',
           'Tap the guest tab',
-          'Enter the <strong>Balance Due</strong> from Aloha',
+          'Enter the <strong data-removed>Balance Due</strong> from Aloha',
           'Tap <strong>Charge</strong>',
           'Blackbird authorizes the payment and charges the guest',
           'Blackbird calculates the <strong data-removed>Tip</strong>',
@@ -1403,10 +1408,10 @@
           'Drop Itemized Receipt',
           '@On Blackbird Terminal',
           'Tap the guest tab',
-          'Enter the <strong>Balance Due</strong> from Micros',
+          'Enter the <strong data-removed>Balance Due</strong> from Micros',
           'Tap <strong>Charge</strong>',
           'Blackbird authorizes the payment and charges the guest',
-          'Blackbird calculates the <strong>Tip</strong> and <strong data-removed>Grand Total</strong>. Do NOT tap "Done" yet.',
+          'Blackbird calculates the <strong data-removed>Tip</strong> and <strong data-removed>Grand Total</strong>. Do NOT tap "Done" yet.',
           '@On Micros POS',
           'Tap <strong>Other Payments</strong>',
           'Enter <strong data-removed>Grand Total</strong> from Blackbird Terminal',
@@ -1416,7 +1421,7 @@
           'Tell the guest they are good to go'
         ],
         notes: [
-          { text: 'Micros requires the <strong>Grand Total</strong> (balance + tip combined), not just the tip separately. The Blackbird Terminal calculates this for you.', type: 'warn' }
+          { text: 'Micros requires the <strong data-removed>Grand Total</strong> (balance + tip combined), not just the tip separately. The Blackbird Terminal calculates this for you.', type: 'warn' }
         ]
       },
       'lightspeed-fsr': {
@@ -1432,7 +1437,7 @@
           'Drop Itemized Receipt',
           '@On Blackbird Terminal',
           'Tap the guest tab',
-          'Enter the <strong>Balance Due</strong> from Lightspeed',
+          'Enter the <strong data-removed>Balance Due</strong> from Lightspeed',
           'Tap <strong>Charge</strong>',
           'Blackbird authorizes the payment and charges the guest',
           'Blackbird calculates the <strong data-removed>Tip</strong>. Do NOT tap "Done" yet.',
@@ -1459,21 +1464,21 @@
           'Drop Itemized Receipt',
           '@On Blackbird Terminal',
           'Tap the guest tab',
-          'Enter the <strong>Balance Due</strong> from SpotOn',
+          'Enter the <strong data-removed>Balance Due</strong> from SpotOn',
           'Tap <strong>Charge</strong>',
           'Blackbird authorizes the payment and charges the guest',
-          '<span style="white-space:nowrap">Blackbird calculates the <b>Tip</b> &amp; <b>Grand Total</b>.</span><br>Do not tap <strong>Done</strong> yet.',
+          '<span style="white-space:nowrap">Blackbird calculates the <strong data-removed>Tip</strong> &amp; <strong data-removed>Grand Total</strong>.</span><br>Do not tap <strong>Done</strong> yet.',
           '@On SpotOn POS',
           'Tap <strong>Take Payment</strong>',
           'Select <strong>Blackbird Pay</strong> tender type',
-          'Enter the <strong>Grand Total</strong> from Blackbird Terminal',
+          'Enter the <strong data-removed>Grand Total</strong> from Blackbird Terminal',
           'Select <strong>Blackbird Pay</strong> tender type again, then tap <strong>Done</strong>',
           '@On Blackbird Terminal',
           'Tap <strong>Done</strong>',
           'Tell the guest they are good to go'
         ],
         notes: [
-          { text: 'Like Micros, SpotOn requires the <strong>Grand Total</strong> (balance + tip combined). The Blackbird Terminal calculates this for you.', type: 'warn' }
+          { text: 'Like Micros, SpotOn requires the <strong data-removed>Grand Total</strong> (balance + tip combined). The Blackbird Terminal calculates this for you.', type: 'warn' }
         ]
       }
     };

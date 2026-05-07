@@ -368,7 +368,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 40px;
+      padding: 16px;
       pointer-events: none;
       transition: background 0.35s ease, backdrop-filter 0.35s ease, -webkit-backdrop-filter 0.35s ease;
     }
@@ -382,7 +382,7 @@
 
     .lightbox-content {
       width: 100%;
-      max-width: 960px;
+      max-width: min(1280px, 95vw);
       border-radius: var(--radius-lg);
       overflow: hidden;
       background: var(--surface);
@@ -391,6 +391,14 @@
       opacity: 0;
       transform: scale(0.92) translateY(20px);
       transition: transform 0.4s var(--spring), opacity 0.3s ease;
+      position: relative;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 10;
     }
 
     .lightbox-backdrop.active .lightbox-content {
@@ -401,7 +409,7 @@
     .lightbox-embed {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%;
+      padding-bottom: 75%;
       background: #000;
     }
 
@@ -626,7 +634,7 @@
         </div>
       </div>
 
-      <div class="video-card full-width" data-src="https://blackbird.navattic.com/oc110t8a" data-title="Anytime Auth" onclick="openLightbox(this)">
+      <div class="video-card" data-src="https://blackbird.navattic.com/oc110t8a" data-title="Anytime Auth" onclick="openLightbox(this)">
         <div class="video-card-preview">
           <img src="https://c.navattic.com/nv_static/11b65f1d83538086c86742a1ec73c2d951e93827318b63dd99b914c6cc451916" alt="Anytime Auth preview" loading="lazy">
           <div class="video-card-preview-inner">
@@ -642,6 +650,22 @@
         </div>
       </div>
 
+      <div class="video-card" data-src="toast-qsr-demo.html" data-title="Toast QSR Flow" onclick="openLightbox(this)">
+        <div class="video-card-preview" style="background: #111;">
+          <div class="video-card-preview-inner">
+            <div class="play-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#0b0b0b" stroke="none"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+            </div>
+            <span class="preview-label">Click to explore</span>
+          </div>
+        </div>
+        <div class="video-card-body">
+          <div class="video-card-title">Toast QSR Flow</div>
+          <div class="video-card-desc">Interactive walkthrough of the Blackbird Pay flow for Toast QSR integrations.</div>
+          <div class="video-card-meta"><span class="video-tag">Interactive Demo</span></div>
+        </div>
+      </div>
+
     </div>
 
 
@@ -650,12 +674,12 @@
   <!-- ═══ LIGHTBOX ═══ -->
   <div class="lightbox-backdrop" id="lightbox" onclick="closeLightboxFromBackdrop(event)">
     <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
       <div class="lightbox-embed" id="lightbox-embed"></div>
       <div class="lightbox-info">
         <div class="lightbox-title" id="lightbox-title"></div>
-        <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
       </div>
     </div>
   </div>
