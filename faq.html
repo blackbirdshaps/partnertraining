@@ -296,13 +296,13 @@
     }
 
     .accordion-item.open .accordion-content {
-      max-height: 600px;
+      max-height: 2000px;
     }
 
     .accordion-body {
       padding: 12px 20px 20px;
       font-size: 14px;
-      color: var(--text-secondary);
+      color: #cccccc;
       line-height: 1.7;
     }
 
@@ -343,6 +343,71 @@
 
     .tag-fsr { background: rgba(186, 195, 255, 0.12); color: #bac3ff; }
 
+    .faq-controls {
+      margin-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-search {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .faq-search:focus {
+      border-color: var(--accent);
+    }
+
+    .faq-search::placeholder {
+      color: var(--text-muted);
+    }
+
+    .faq-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .faq-nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      text-decoration: none;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .faq-nav-link:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      background: var(--accent-bg);
+    }
+
+    .accordion-section-title svg {
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    .faq-no-results {
+      text-align: center;
+      padding: 48px 0;
+      color: var(--text-muted);
+      font-size: 14px;
+      display: none;
+    }
+
     @media (max-width: 640px) {
       .container { padding: 0 14px; }
       .header { padding: 16px 0 12px; margin-bottom: 20px; }
@@ -379,24 +444,14 @@
 
   <main class="container">
 
-    <section id="what-is-blackbird" class="collapsible-section open" style="scroll-margin-top: 100px;">
-      <button class="section-header section-header-toggle" onclick="toggleSection(this)">
-        <h2 class="section-title">What is Blackbird?</h2>
-        <svg class="section-chevron" width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <div class="collapsible-body">
-        <div class="collapsible-body-inner">
-          <div class="blackbird-intro">
-            <p>Blackbird is the app for restaurant lovers, offering the richest rewards in dining. Earn points every time you dine and pay with Blackbird, which you can use here or at any spot across the network. The more you dine, the more you unlock, including access to Blackbird Club, Blackbird's loyalty program for the restaurant obsessed.</p>
-            <div class="elevator-pitch">
-              <strong>Elevator pitch:</strong> "We accept Blackbird, an app that rewards you with points for dining out. You can pay in the app and use your points like cash here and at other great restaurants in the Blackbird network."
-            </div>
-          </div>
+    <section id="what-is-blackbird" style="margin-bottom: 32px; scroll-margin-top: 100px;">
+      <div class="blackbird-intro">
+        <p>Blackbird is the app for restaurant lovers, offering the richest rewards in dining. Earn points every time you dine and pay with Blackbird, which you can use here or at any spot across the network. The more you dine, the more you unlock, including access to Blackbird Club, Blackbird's loyalty program for the restaurant obsessed.</p>
+        <div class="elevator-pitch">
+          <strong>Elevator pitch:</strong> "We accept Blackbird, an app that rewards you with points for dining out. You can pay in the app and use your points like cash here and at other great restaurants in the Blackbird network."
         </div>
       </div>
     </section>
-
-    <div class="divider"></div>
 
     <div class="section-header">
       <div class="section-label">Quick Reference</div>
@@ -404,9 +459,21 @@
       <p class="section-subtitle">General info and troubleshooting. Payment-specific FAQs appear alongside each POS flow.</p>
     </div>
 
+    <div class="faq-controls">
+      <input type="text" class="faq-search" id="faq-search" placeholder="Search FAQs…" oninput="filterFAQs(this.value)" autocomplete="off">
+      <nav class="faq-nav">
+        <a href="#getting-started" class="faq-nav-link">Getting Started</a>
+        <a href="#payment-troubleshooting" class="faq-nav-link">Payment Troubleshooting</a>
+        <a href="#terminal-troubleshooting" class="faq-nav-link">Terminal Troubleshooting</a>
+      </nav>
+    </div>
+
     <div class="accordion-group">
 
-      <div class="accordion-section-title">Getting Started</div>
+      <div class="accordion-section-title" id="getting-started" style="display:flex; align-items:center; gap:8px; scroll-margin-top: 100px;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Getting Started
+      </div>
 
       <div class="accordion-item">
         <button class="accordion-trigger" onclick="toggleAccordion(this)">
@@ -460,7 +527,10 @@
         </div></div>
       </div>
 
-      <div class="accordion-section-title">Payment Troubleshooting</div>
+      <div class="accordion-section-title" id="payment-troubleshooting" style="display:flex; align-items:center; gap:8px; scroll-margin-top: 100px;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="3.5" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M1 6.5h14" stroke="currentColor" stroke-width="1.5"/></svg>
+        Payment Troubleshooting
+      </div>
 
       <div class="accordion-item">
         <button class="accordion-trigger" onclick="toggleAccordion(this)">
@@ -529,7 +599,10 @@
         </div></div>
       </div>
 
-      <div class="accordion-section-title">Terminal Troubleshooting</div>
+      <div class="accordion-section-title" id="terminal-troubleshooting" style="display:flex; align-items:center; gap:8px; scroll-margin-top: 100px;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="2" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M5 14h6M8 12v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Terminal Troubleshooting
+      </div>
 
       <div class="accordion-item">
         <button class="accordion-trigger" onclick="toggleAccordion(this)">
@@ -695,6 +768,8 @@
         </div></div>
       </div>
 
+      <div id="faq-no-results" class="faq-no-results">No FAQs match your search.</div>
+
     </div>
 
   </main>
@@ -708,6 +783,35 @@
       const wasOpen = item.classList.contains('open');
       document.querySelectorAll('.accordion-item.open').forEach(el => el.classList.remove('open'));
       if (!wasOpen) item.classList.add('open');
+    }
+    function filterFAQs(query) {
+      const q = query.toLowerCase().trim();
+      const items = document.querySelectorAll('.accordion-item');
+      const sectionTitles = document.querySelectorAll('.accordion-section-title');
+      let anyVisible = false;
+
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const match = !q || text.includes(q);
+        item.style.display = match ? '' : 'none';
+        if (match) anyVisible = true;
+      });
+
+      // Hide section titles if all their items are hidden
+      sectionTitles.forEach(title => {
+        let next = title.nextElementSibling;
+        let hasVisible = false;
+        while (next && !next.classList.contains('accordion-section-title')) {
+          if (next.classList.contains('accordion-item') && next.style.display !== 'none') {
+            hasVisible = true;
+          }
+          next = next.nextElementSibling;
+        }
+        title.style.display = hasVisible ? '' : 'none';
+      });
+
+      const noResults = document.getElementById('faq-no-results');
+      if (noResults) noResults.style.display = anyVisible ? 'none' : 'block';
     }
   </script>
 
