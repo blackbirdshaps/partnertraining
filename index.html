@@ -1293,8 +1293,8 @@
     <section id="pos-section" style="scroll-margin-top: 100px;">
       <div class="section-header">
         <div class="section-label">Payment Flows</div>
-        <h1 class="section-title">Choose your POS system</h1>
-        <p class="section-subtitle">Select your POS system to view step-by-step payment instructions.</p>
+        <h1 class="section-title" id="pos-section-title">Choose your POS system</h1>
+        <p class="section-subtitle" id="pos-section-subtitle">Select your POS system to view step-by-step payment instructions.</p>
       </div>
       <div id="pos-chain"></div>
       <div id="pos-content">
@@ -1600,6 +1600,12 @@
       html += '</div>';
       container.innerHTML = html;
       if (scrollIndicatorEl) scrollIndicatorEl.classList.remove('visible');
+
+      // Reset section header
+      const titleEl = document.getElementById('pos-section-title');
+      const subtitleEl = document.getElementById('pos-section-subtitle');
+      if (titleEl) titleEl.textContent = 'Choose your POS system';
+      if (subtitleEl) subtitleEl.textContent = 'Select your POS system to view step-by-step payment instructions.';
     }
 
     function selectPOS(el, posName) {
@@ -1735,6 +1741,12 @@
       html += '</div>'; // .flow-view-main
       html += '</div>'; // .flow-view
       container.innerHTML = html;
+
+      // Update section header to show the selected POS name
+      const titleEl = document.getElementById('pos-section-title');
+      const subtitleEl = document.getElementById('pos-section-subtitle');
+      if (titleEl) titleEl.textContent = data.name;
+      if (subtitleEl) subtitleEl.textContent = data.type;
 
       // Draw connectors after a brief delay for animations to settle
       requestAnimationFrame(() => requestAnimationFrame(drawConnectors));
