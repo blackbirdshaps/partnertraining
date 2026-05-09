@@ -1684,9 +1684,8 @@
         html += '</div>';
       }
 
-      // Quick FAQs below the flow — styled like General FAQ accordions
-      const faqKey = posId.endsWith('-qsr') ? posId : 'fsr';
-      const faqs = posFAQs[faqKey] || posFAQs['fsr'];
+      // Quick FAQs below the flow — only shown for QSR systems
+      const faqs = posId.endsWith('-qsr') ? (posFAQs[posId] || []) : [];
       if (faqs && faqs.length) {
         html += '<div class="flow-view-faq">';
         html += '<div class="flow-view-faq-title">Quick FAQs</div>';
