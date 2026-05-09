@@ -1605,7 +1605,7 @@
       const titleEl = document.getElementById('pos-section-title');
       const subtitleEl = document.getElementById('pos-section-subtitle');
       if (titleEl) titleEl.textContent = 'Choose your POS system';
-      if (subtitleEl) subtitleEl.textContent = 'Select your POS system to view step-by-step payment instructions.';
+      if (subtitleEl) { subtitleEl.style.display = ''; subtitleEl.textContent = 'Select your POS system to view step-by-step payment instructions.'; }
     }
 
     function selectPOS(el, posName) {
@@ -1751,7 +1751,7 @@
         const serviceLabel = hasBothVariants ? (posId.endsWith('-qsr') ? ' Quick Service' : ' Full Service') : '';
         titleEl.textContent = data.name + serviceLabel;
       }
-      if (subtitleEl) subtitleEl.textContent = data.type;
+      if (subtitleEl) subtitleEl.style.display = 'none';
 
       // Draw connectors after a brief delay for animations to settle
       requestAnimationFrame(() => requestAnimationFrame(drawConnectors));
