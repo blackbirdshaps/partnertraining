@@ -395,10 +395,15 @@
     }
 
     .lightbox-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 10;
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 1100;
+      display: none;
+    }
+
+    .lightbox-backdrop.active .lightbox-close {
+      display: flex;
     }
 
     .lightbox-backdrop.active .lightbox-content {
@@ -672,10 +677,10 @@
 
   <!-- ═══ LIGHTBOX ═══ -->
   <div class="lightbox-backdrop" id="lightbox" onclick="closeLightboxFromBackdrop(event)">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
     <div class="lightbox-content">
-      <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
       <div class="lightbox-embed" id="lightbox-embed"></div>
       <div class="lightbox-info">
         <div class="lightbox-title" id="lightbox-title"></div>
@@ -693,7 +698,8 @@
       const title = card.dataset.title;
 
       lightboxTitle.textContent = title;
-      lightboxEmbed.innerHTML = '<iframe src="' + src + '" allow="fullscreen" allowfullscreen></iframe>';
+      const cacheBust = src.includes('navattic') ? src : src + '?v=' + Date.now();
+      lightboxEmbed.innerHTML = '<iframe src="' + cacheBust + '" allow="fullscreen" allowfullscreen></iframe>';
 
       // Force reflow before adding class for transition
       lightbox.offsetHeight;

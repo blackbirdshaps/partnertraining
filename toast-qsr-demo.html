@@ -182,6 +182,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:16p
 .step-number{font-family:'DM Mono',monospace;font-size:10px;color:var(--bb-gray);margin-bottom:4px;letter-spacing:.05em}
 .step-card h3{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;letter-spacing:-.01em;margin-bottom:10px;line-height:1.25}
 .step-card p{font-size:13.5px;line-height:1.72;color:rgba(240,236,228,.72)}
+.step-card.pos-step h3,.step-card.pos-step p,.step-card.pos-step .callout-text{font-family:'Calibre','Helvetica Neue',Arial,sans-serif}
 .step-card p+p{margin-top:8px}
 .code-chip{display:inline-block;background:rgba(76,95,249,.14);border:1px solid rgba(76,95,249,.28);color:#8e9bfc;font-family:'DM Mono',monospace;font-size:12px;padding:1px 8px;border-radius:4px;margin:0 2px}
 .callout{border-radius:9px;padding:10px 13px;margin-top:11px;font-size:12.5px;line-height:1.6;display:flex;gap:8px;align-items:flex-start}
@@ -402,7 +403,7 @@ footer{border-top:1px solid var(--border);padding:20px 40px;display:flex;justify
       <p>When a guest wants to pay with Blackbird, they open the app and check in. Their name and a unique 6-digit code appear instantly on your Blackbird Terminal &mdash; like <span class="code-chip">BB4911</span>.</p>
       <div class="callout info"><span class="callout-icon">&#128161;</span><div class="callout-text"><strong>Each code is unique to that visit.</strong> It changes every time &mdash; always use the one currently on screen.</div></div>
     </div>
-    <div class="step-card" id="sc1">
+    <div class="step-card pos-step" id="sc1">
       <div class="step-number">Step 2 of 6</div>
       <div class="sc-where pos-where">Toast POS</div>
       <h3>Type the code into the Tab Name field</h3>
@@ -410,22 +411,20 @@ footer{border-top:1px solid var(--border);padding:20px 40px;display:flex;justify
       <div class="callout warn"><span class="callout-icon">&#9888;&#65039;</span><div class="callout-text"><strong>This is the most critical step.</strong> If the code is wrong or missing, Blackbird cannot route the payment and your restaurant won't get paid.</div></div>
       <div class="callout info"><span class="callout-icon">&#128203;</span><div class="callout-text"><strong>Optional:</strong> Add the guest's name with a space before or after &mdash; e.g. <span class="code-chip">Ally BB4911</span></div></div>
     </div>
-    <div class="step-card" id="sc2">
+    <div class="step-card pos-step" id="sc2">
       <div class="step-number">Step 3 of 6</div>
       <div class="sc-where pos-where">Toast POS</div>
       <h3>Place the order as usual</h3>
       <p>Ring in the order on Toast exactly as you normally would. The code you entered is all Blackbird needs &mdash; nothing else changes in your workflow.</p>
-      <div class="callout success"><span class="callout-icon">&#10003;</span><div class="callout-text"><strong>No changes to how you take the order.</strong> Same flow, same POS, same everything.</div></div>
     </div>
-    <div class="step-card" id="sc3">
+    <div class="step-card pos-step" id="sc3">
       <div class="step-number">Step 4 of 6</div>
       <div class="sc-where pos-where">Toast POS</div>
       <h3>Select Blackbird Pay as the tender type</h3>
       <p>When closing the check, tap <strong>Blackbird Pay</strong> from the tender options &mdash; the same way you'd select card or cash. No card swipe needed.</p>
-      <div class="callout danger"><span class="callout-icon">&#9888;&#65039;</span><div class="callout-text"><strong>Don't select Card or Cash.</strong> Only Blackbird Pay will correctly close the check and trigger the guest's rewards.</div></div>
       <div class="callout success"><span class="callout-icon">&#128179;</span><div class="callout-text"><strong>Payment processes automatically</strong> through the guest's linked account in the Blackbird app.</div></div>
     </div>
-    <div class="step-card" id="sc4">
+    <div class="step-card pos-step" id="sc4">
       <div class="step-number">Step 5 of 6</div>
       <div class="sc-where pos-where">Toast POS</div>
       <h3>Guest selects their tip on Toast</h3>
