@@ -371,7 +371,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-top: 108px;
+      margin-top: 52px;
     }
 
     .flow-view-main {
@@ -1318,7 +1318,10 @@
     <section id="pos-section" style="scroll-margin-top: 100px;">
       <div class="section-header">
         <div class="section-label">Payment Flows</div>
-        <h1 class="section-title" id="pos-section-title">Choose your POS system</h1>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
+          <h1 class="section-title" id="pos-section-title">Choose your POS system</h1>
+          <a class="print-btn" id="section-print-btn" href="#" target="_blank" style="display:none;flex-shrink:0"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 6V1h8v5M4 12H2.5A1.5 1.5 0 011 10.5v-4A1.5 1.5 0 012.5 5h11A1.5 1.5 0 0115 6.5v4a1.5 1.5 0 01-1.5 1.5H12M4 9h8v6H4V9z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Print Instructions</a>
+        </div>
         <p class="section-subtitle" id="pos-section-subtitle">Select your POS system to view step-by-step payment instructions.</p>
       </div>
       <div id="pos-chain"></div>
@@ -1631,6 +1634,8 @@
       const subtitleEl = document.getElementById('pos-section-subtitle');
       if (titleEl) titleEl.innerHTML = 'Choose your POS system';
       if (subtitleEl) { subtitleEl.style.display = ''; subtitleEl.textContent = 'Select your POS system to view step-by-step payment instructions.'; }
+      const printBtn = document.getElementById('section-print-btn');
+      if (printBtn) printBtn.style.display = 'none';
     }
 
     function selectPOS(el, posName) {
@@ -1710,11 +1715,6 @@
 
       // Flow steps column
       html += '<div>';
-      if (cardFile) {
-        html += '<div class="flow-view-header">';
-        html += `<a class="print-btn" href="source%20materials/cards/${encodeURIComponent(cardFile)}" target="_blank"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 6V1h8v5M4 12H2.5A1.5 1.5 0 011 10.5v-4A1.5 1.5 0 012.5 5h11A1.5 1.5 0 0115 6.5v4a1.5 1.5 0 01-1.5 1.5H12M4 9h8v6H4V9z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Print Instructions</a>`;
-        html += '</div>';
-      }
 
       if (data.checkin) {
         html += '<div class="flow-columns">';
@@ -1785,6 +1785,17 @@
           : data.name;
       }
       if (subtitleEl) subtitleEl.style.display = 'none';
+
+      // Show print button in header
+      const printBtn = document.getElementById('section-print-btn');
+      if (printBtn) {
+        if (cardFile) {
+          printBtn.href = `source%20materials/cards/${encodeURIComponent(cardFile)}`;
+          printBtn.style.display = 'inline-flex';
+        } else {
+          printBtn.style.display = 'none';
+        }
+      }
 
       // Draw connectors after a brief delay for animations to settle
       requestAnimationFrame(() => requestAnimationFrame(drawConnectors));
