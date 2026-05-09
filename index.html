@@ -1745,7 +1745,12 @@
       // Update section header to show the selected POS name
       const titleEl = document.getElementById('pos-section-title');
       const subtitleEl = document.getElementById('pos-section-subtitle');
-      if (titleEl) titleEl.textContent = data.name;
+      if (titleEl) {
+        const posBase = posId.replace(/-fsr$|-qsr$/, '');
+        const hasBothVariants = posData[posBase + '-fsr'] && posData[posBase + '-qsr'];
+        const serviceLabel = hasBothVariants ? (posId.endsWith('-qsr') ? ' Quick Service' : ' Full Service') : '';
+        titleEl.textContent = data.name + serviceLabel;
+      }
       if (subtitleEl) subtitleEl.textContent = data.type;
 
       // Draw connectors after a brief delay for animations to settle
