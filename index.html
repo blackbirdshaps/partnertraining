@@ -593,28 +593,52 @@
     }
 
     .flow-note {
-      background: var(--accent-bg);
-      border: 1px solid var(--accent-border);
       border-radius: var(--radius-sm);
-      padding: 14px 16px;
+      padding: 11px 14px 12px 14px;
       font-size: 13px;
       color: var(--text-secondary);
       line-height: 1.6;
-      margin-top: 16px;
+      border: 1px solid transparent;
+      border-left: 3px solid;
     }
 
-    .flow-note strong {
-      color: var(--accent-bright);
+    .flow-note-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 5px;
     }
 
+    /* warn — red */
     .flow-note-warn {
-      background: var(--danger-bg);
-      border-color: rgba(255, 84, 73, 0.2);
+      background: rgba(255, 84, 73, 0.07);
+      border-color: rgba(255, 84, 73, 0.18);
+      border-left-color: var(--danger);
     }
+    .flow-note-warn .flow-note-label { color: var(--danger); }
+    .flow-note-warn strong { color: var(--danger); }
 
-    .flow-note-warn strong {
-      color: var(--danger);
+    /* tip — accent blue */
+    .flow-note-tip {
+      background: var(--accent-bg);
+      border-color: var(--accent-border);
+      border-left-color: var(--accent-bright);
     }
+    .flow-note-tip .flow-note-label { color: var(--accent-bright); }
+    .flow-note-tip strong { color: var(--accent-bright); }
+
+    /* info/note — amber */
+    .flow-note-info {
+      background: rgba(254, 234, 86, 0.05);
+      border-color: rgba(254, 234, 86, 0.15);
+      border-left-color: #feea56;
+    }
+    .flow-note-info .flow-note-label { color: #feea56; }
+    .flow-note-info strong { color: #feea56; }
 
     /* ── Sidebar FAQ Accordions ───────────────────── */
     .sidebar-faq-item {
@@ -1355,7 +1379,7 @@
         ],
         notes: [
           { text: '<strong>The 6-digit code must be entered correctly</strong> for your restaurant to get paid.', type: 'warn' },
-          { text: 'Optional: Add the guest\'s name before or after the code, e.g. <strong>Ally BB1234</strong> or <strong>BB1234 Ally</strong>', type: 'info' },
+          { text: 'Optional: Add the guest\'s name before or after the code, e.g. <strong>Ally BB1234</strong> or <strong>BB1234 Ally</strong>', type: 'tip' },
           { text: 'Each code is <strong>one-time use</strong>. If the guest places another order, they need a new check-in for a new code.', type: 'info' }
         ]
       },
@@ -1403,7 +1427,7 @@
         ],
         notes: [
           { text: 'Square QSR does <strong>not</strong> use the BBXXXX code system. You manually match the guest name on the Terminal to their Square order.', type: 'info' },
-          { text: 'If the order is not visible on the Terminal, <strong>pull down on the screen to refresh</strong>.', type: 'info' }
+          { text: 'If the order is not visible on the Terminal, <strong>pull down on the screen to refresh</strong>.', type: 'tip' }
         ]
       },
       'aloha-fsr': {
@@ -1713,9 +1737,17 @@
       // Notes column (right side if present)
       if (hasNotes) {
         html += '<div class="flow-view-notes">';
+        const noteMeta = {
+          warn: { cls: 'flow-note-warn', label: 'Critical', icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 1L15 14H1L8 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="8" y1="6" x2="8" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12.5" r="0.75" fill="currentColor"/></svg>' },
+          tip:  { cls: 'flow-note-tip',  label: 'Tip',      icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
+          info: { cls: 'flow-note-info', label: 'Note',     icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
+        };
         data.notes.forEach(n => {
-          const cls = n.type === 'warn' ? 'flow-note flow-note-warn' : 'flow-note';
-          html += `<div class="${cls}">${n.text}</div>`;
+          const meta = noteMeta[n.type] || noteMeta.info;
+          html += `<div class="flow-note ${meta.cls}">`;
+          html += `<div class="flow-note-label">${meta.icon} ${meta.label}</div>`;
+          html += n.text;
+          html += `</div>`;
         });
         html += '</div>';
       }
