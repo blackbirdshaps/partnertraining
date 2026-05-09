@@ -355,6 +355,10 @@
       gap: 16px;
     }
 
+    .faq-search-wrap {
+      position: relative;
+    }
+
     .faq-search {
       width: 100%;
       background: var(--surface);
@@ -363,9 +367,36 @@
       color: var(--text);
       font-family: inherit;
       font-size: 14px;
-      padding: 12px 16px;
+      padding: 12px 40px 12px 16px;
       outline: none;
       transition: border-color var(--transition);
+    }
+
+    .faq-search-clear {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: none;
+      background: var(--border);
+      color: var(--text-secondary);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .faq-search-clear:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .faq-search-wrap.has-value .faq-search-clear {
+      display: flex;
     }
 
     .faq-search:focus {
@@ -457,7 +488,12 @@
     </div>
 
     <div class="faq-controls">
-      <input type="text" class="faq-search" id="faq-search" placeholder="Search FAQs…" oninput="filterFAQs(this.value)" autocomplete="off">
+      <div class="faq-search-wrap" id="faq-search-wrap">
+        <input type="text" class="faq-search" id="faq-search" placeholder="Search FAQs…" oninput="handleSearch(this.value)" autocomplete="off">
+        <button class="faq-search-clear" onclick="clearSearch()" aria-label="Clear search">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
       <nav class="faq-nav">
         <a href="#getting-started" class="faq-nav-link">Getting Started</a>
         <a href="#payment-troubleshooting" class="faq-nav-link">Payment Troubleshooting</a>
@@ -802,6 +838,19 @@
       document.querySelectorAll('.accordion-item.open').forEach(el => el.classList.remove('open'));
       if (!wasOpen) item.classList.add('open');
     }
+    function handleSearch(value) {
+      document.getElementById('faq-search-wrap').classList.toggle('has-value', value.length > 0);
+      filterFAQs(value);
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('faq-search');
+      input.value = '';
+      document.getElementById('faq-search-wrap').classList.remove('has-value');
+      filterFAQs('');
+      input.focus();
+    }
+
     function filterFAQs(query) {
       const q = query.toLowerCase().trim();
       const items = document.querySelectorAll('.accordion-item');
