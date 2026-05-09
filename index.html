@@ -1685,13 +1685,11 @@
 
       // Flow steps column
       html += '<div>';
-      html += '<div class="flow-view-header">';
-      html += `<h1 class="flow-view-name">${data.name}</h1>`;
-      html += `<span class="flow-view-type ${data.typeClass}">${data.type}</span>`;
       if (cardFile) {
-        html += `<a class="print-btn" href="source%20materials/cards/${encodeURIComponent(cardFile)}" target="_blank" style="margin-left:auto"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 6V1h8v5M4 12H2.5A1.5 1.5 0 011 10.5v-4A1.5 1.5 0 012.5 5h11A1.5 1.5 0 0115 6.5v4a1.5 1.5 0 01-1.5 1.5H12M4 9h8v6H4V9z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Print Instructions</a>`;
+        html += '<div class="flow-view-header">';
+        html += `<a class="print-btn" href="source%20materials/cards/${encodeURIComponent(cardFile)}" target="_blank"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 6V1h8v5M4 12H2.5A1.5 1.5 0 011 10.5v-4A1.5 1.5 0 012.5 5h11A1.5 1.5 0 0115 6.5v4a1.5 1.5 0 01-1.5 1.5H12M4 9h8v6H4V9z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Print Instructions</a>`;
+        html += '</div>';
       }
-      html += '</div>';
 
       if (data.checkin) {
         html += '<div class="flow-columns">';
