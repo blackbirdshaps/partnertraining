@@ -309,6 +309,11 @@
     .accordion-body p { margin-bottom: 12px; }
     .accordion-body p:last-child { margin-bottom: 0; }
     .accordion-body strong { color: var(--text); font-weight: 600; }
+
+    .accordion-item.open .accordion-body {
+      font-size: 15px;
+      color: #e8e8e8;
+    }
     .accordion-body ul { padding-left: 20px; margin-bottom: 12px; }
     .accordion-body li { margin-bottom: 6px; }
 
@@ -444,14 +449,6 @@
 
   <main class="container">
 
-    <section id="what-is-blackbird" style="margin-bottom: 32px; scroll-margin-top: 100px;">
-      <div class="blackbird-intro">
-        <p>Blackbird is the app for restaurant lovers, offering the richest rewards in dining. Earn points every time you dine and pay with Blackbird, which you can use here or at any spot across the network. The more you dine, the more you unlock, including access to Blackbird Club, Blackbird's loyalty program for the restaurant obsessed.</p>
-        <div class="elevator-pitch">
-          <strong>Elevator pitch:</strong> "We accept Blackbird, an app that rewards you with points for dining out. You can pay in the app and use your points like cash here and at other great restaurants in the Blackbird network."
-        </div>
-      </div>
-    </section>
 
     <div class="section-header">
       <div class="section-label">Quick Reference</div>
@@ -477,6 +474,26 @@
 
       <div class="accordion-item">
         <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">What is Blackbird?</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>Blackbird is the app for restaurant lovers, offering the richest rewards in dining. Earn points every time you dine and pay with Blackbird, which you can use here or at any spot across the network. The more you dine, the more you unlock, including access to Blackbird Club, Blackbird's loyalty program for the restaurant obsessed.</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">When a guest asks about Blackbird, what do I say?</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>"We accept Blackbird, an app that rewards you with points ($FLY) for dining out. You can pay in the app and use your points like cash here and at other great restaurants in the Blackbird network."</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
           <span class="accordion-trigger-left">How do guest check-ins work?</span>
           <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
@@ -494,16 +511,6 @@
         <div class="accordion-content"><div class="accordion-body">
           <p>The purple puck is for <strong>employees</strong> — tapping it unlocks <strong>Industry Status</strong> in the Blackbird app, which gives access to exclusive Blackbird-funded perks and rewards designed for restaurant workers.</p>
           <p>Employees must physically tap the purple puck in order to get, and maintain, industry status. (GPS check-ins don't work for this.)</p>
-        </div></div>
-      </div>
-
-      <div class="accordion-item">
-        <button class="accordion-trigger" onclick="toggleAccordion(this)">
-          <span class="accordion-trigger-left">When a guest asks about Blackbird, what do I say?</span>
-          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="accordion-content"><div class="accordion-body">
-          <p>"We accept Blackbird, an app that rewards you with points ($FLY) for dining out. You can pay in the app and use your points like cash here and at other great restaurants in the Blackbird network."</p>
         </div></div>
       </div>
 
