@@ -530,6 +530,31 @@
       .lightbox-backdrop { padding: 20px; }
     }
 
+    .video-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .video-nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      text-decoration: none;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .video-nav-link:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      background: var(--accent-bg);
+    }
+
     @media (max-width: 640px) {
       .container { padding: 0 14px; }
       .header { padding: 16px 0 12px; margin-bottom: 20px; }
@@ -555,7 +580,7 @@
         <div class="logo-text">Blackbird <span>Partner Hub</span></div>
       </a>
       <nav class="header-nav">
-        <a href="index.html" class="header-badge">Pay Instructions</a>
+        <a href="index.html" class="header-badge">How It Works</a>
         <a href="faq.html" class="header-badge">FAQs</a>
         <div class="header-badge active">Training Videos</div>
         <a href="contact.html" class="header-badge header-badge-contact">Contact Support</a>
@@ -569,13 +594,21 @@
       <div class="section-label">Video Library</div>
       <h1 class="section-title">Training Videos</h1>
       <p class="section-subtitle">Interactive walkthroughs for select Blackbird payment flows. Click any tile to learn more.</p>
+      <nav class="video-nav">
+        <a href="#pin-code" class="video-nav-link">PIN Code</a>
+        <a href="#pay-flow" class="video-nav-link">Pay Flow (Full Service)</a>
+        <a href="#void-flow" class="video-nav-link">Void Flow</a>
+        <a href="#terminal-login" class="video-nav-link">Terminal Log In</a>
+        <a href="#anytime-auth" class="video-nav-link">Anytime Auth</a>
+        <a href="#toast-qsr" class="video-nav-link">Toast QSR Flow</a>
+      </nav>
     </div>
 
     <!-- ═══ VIDEO GRID ═══ -->
 
     <div class="video-grid">
 
-      <div class="video-card" data-src="https://blackbird.navattic.com/rpn02ud" data-title="PIN Code" onclick="openLightbox(this)">
+      <div id="pin-code" class="video-card" data-src="https://blackbird.navattic.com/rpn02ud" data-title="PIN Code" onclick="openLightbox(this)">
         <div class="video-card-preview">
           <img src="https://c.navattic.com/nv_static/748c5a58f0431d5ecc96842367d25e71178fe02140e4e6cd8cbe7168f29a02ca" alt="PIN Code preview" loading="lazy">
           <div class="video-card-preview-inner">
@@ -591,7 +624,7 @@
         </div>
       </div>
 
-      <div class="video-card" data-src="https://blackbird.navattic.com/xp1c07o3" data-title="Pay Flow (Full Service)" onclick="openLightbox(this)">
+      <div id="pay-flow" class="video-card" data-src="https://blackbird.navattic.com/xp1c07o3" data-title="Pay Flow (Full Service)" onclick="openLightbox(this)">
         <div class="video-card-preview">
           <img src="https://c.navattic.com/nv_static/f95d8839e517ac9b3ecff998673da2f9e36655dcc21a2799ffc2fdfc66328612" alt="Pay Flow (Full Service) preview" loading="lazy">
           <div class="video-card-preview-inner">
@@ -607,7 +640,7 @@
         </div>
       </div>
 
-      <div class="video-card" data-src="https://blackbird.navattic.com/ua8m0xdp" data-title="Void Flow" onclick="openLightbox(this)">
+      <div id="void-flow" class="video-card" data-src="https://blackbird.navattic.com/ua8m0xdp" data-title="Void Flow" onclick="openLightbox(this)">
         <div class="video-card-preview">
           <img src="https://c.navattic.com/nv_static/2ffa22bbfc02528610f6380541c4d0a477bbfc135b1d4aebe4422aca51116cc1" alt="Void Flow preview" loading="lazy">
           <div class="video-card-preview-inner">
@@ -623,7 +656,7 @@
         </div>
       </div>
 
-      <div class="video-card" data-src="https://blackbird.navattic.com/wt8i0zk4" data-title="Terminal Log In" onclick="openLightbox(this)">
+      <div id="terminal-login" class="video-card" data-src="https://blackbird.navattic.com/wt8i0zk4" data-title="Terminal Log In" onclick="openLightbox(this)">
         <div class="video-card-preview">
           <img src="https://c.navattic.com/nv_static/cc093b0ed615bcf271bc0a3a8c79f9d88a945a1026c4ffd4c29c07101c19bf2a" alt="Terminal Log In preview" loading="lazy">
           <div class="video-card-preview-inner">
@@ -639,7 +672,7 @@
         </div>
       </div>
 
-      <div class="video-card" data-src="https://blackbird.navattic.com/oc110t8a" data-title="Anytime Auth" onclick="openLightbox(this)">
+      <div id="anytime-auth" class="video-card" data-src="https://blackbird.navattic.com/oc110t8a" data-title="Anytime Auth" onclick="openLightbox(this)">
         <div class="video-card-preview">
           <img src="https://c.navattic.com/nv_static/11b65f1d83538086c86742a1ec73c2d951e93827318b63dd99b914c6cc451916" alt="Anytime Auth preview" loading="lazy">
           <div class="video-card-preview-inner">
@@ -655,7 +688,7 @@
         </div>
       </div>
 
-      <div class="video-card" data-src="toast-qsr-demo.html" data-title="Toast QSR Flow" onclick="openLightbox(this)">
+      <div id="toast-qsr" class="video-card" data-src="toast-qsr-demo.html" data-title="Toast QSR Flow" onclick="openLightbox(this)">
         <div class="video-card-preview" style="background: #111;">
           <div class="video-card-preview-inner">
             <div class="play-icon">
