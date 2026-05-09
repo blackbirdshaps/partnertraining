@@ -1604,7 +1604,7 @@
       // Reset section header
       const titleEl = document.getElementById('pos-section-title');
       const subtitleEl = document.getElementById('pos-section-subtitle');
-      if (titleEl) titleEl.textContent = 'Choose your POS system';
+      if (titleEl) titleEl.innerHTML = 'Choose your POS system';
       if (subtitleEl) { subtitleEl.style.display = ''; subtitleEl.textContent = 'Select your POS system to view step-by-step payment instructions.'; }
     }
 
@@ -1747,7 +1747,9 @@
         const posBase = posId.replace(/-fsr$|-qsr$/, '');
         const hasBothVariants = posData[posBase + '-fsr'] && posData[posBase + '-qsr'];
         const serviceLabel = hasBothVariants ? (posId.endsWith('-qsr') ? ' Quick Service' : ' Full Service') : '';
-        titleEl.textContent = data.name + serviceLabel;
+        titleEl.innerHTML = serviceLabel
+          ? `${data.name} <span style="color:var(--accent-bright);font-weight:700">${serviceLabel.trim()}</span>`
+          : data.name;
       }
       if (subtitleEl) subtitleEl.style.display = 'none';
 
