@@ -1410,8 +1410,8 @@
           'Click <strong>Confirm</strong> to close'
         ],
         notes: [
-          { text: 'Optional: Add the guest\'s name before or after the code, e.g. <strong>Ally BB1234</strong> or <strong>BB1234 Ally</strong>', type: 'tip' },
-          { text: 'Each code is <strong>one-time use</strong>. If the guest places another order, they need a new check-in for a new code.', type: 'info' }
+          { text: 'You can add the guest\'s name before or after the code, e.g. <strong>Ally BB1234</strong> or <strong>BB1234 Ally</strong>', type: 'tip' },
+          { text: 'Each six-digit code is <strong>one-time use</strong>. If the guest places another order, they need a new check-in for a new code.', type: 'info' }
         ]
       },
       'square-fsr': {
@@ -1726,7 +1726,7 @@
       function renderSteps(steps) {
         const inlineMeta = {
           warn: { cls: 'flow-note-warn', label: 'Critical', icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 1L15 14H1L8 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="8" y1="6" x2="8" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12.5" r="0.75" fill="currentColor"/></svg>' },
-          tip:  { cls: 'flow-note-tip',  label: 'Tip',      icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
+          tip:  { cls: 'flow-note-tip',  label: 'Optional',      icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
           info: { cls: 'flow-note-info', label: 'Note',     icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
         };
         const result = [];
@@ -1774,7 +1774,7 @@
 
       const noteMetaMap = {
         warn: { cls: 'flow-note-warn', label: 'Critical', icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 1L15 14H1L8 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="8" y1="6" x2="8" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12.5" r="0.75" fill="currentColor"/></svg>' },
-        tip:  { cls: 'flow-note-tip',  label: 'Tip',      icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
+        tip:  { cls: 'flow-note-tip',  label: 'Optional',      icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
         info: { cls: 'flow-note-info', label: 'Note',     icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
       };
 
