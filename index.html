@@ -371,7 +371,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-top: 52px;
+      margin-top: 80px;
     }
 
     .flow-view-main {
@@ -1764,18 +1764,18 @@
       const cardFile = cardPDFs[posId];
       html += `<div class="flow-view ${hasNotes ? 'has-notes' : ''} flow-animate">`;
 
-      html += '<div class="flow-view-main">';
-
-      // Flow steps column
-      html += '<div>';
-
-      // Print button toolbar — right-aligned, just above the step columns
+      // Print button — full-width row so it sits at the far right of the content area
       if (cardFile) {
         const printIcon = '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M4 6V1h8v5M4 12H2.5A1.5 1.5 0 011 10.5v-4A1.5 1.5 0 012.5 5h11A1.5 1.5 0 0115 6.5v4a1.5 1.5 0 01-1.5 1.5H12M4 9h8v6H4V9z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         html += `<div style="display:flex;justify-content:flex-end;margin-bottom:16px">`;
         html += `<a class="print-btn" href="source%20materials/cards/${encodeURIComponent(cardFile)}" target="_blank">${printIcon} Print Instructions</a>`;
         html += `</div>`;
       }
+
+      html += '<div class="flow-view-main">';
+
+      // Flow steps column
+      html += '<div>';
 
       const noteMetaMap = {
         warn: { cls: 'flow-note-warn', label: 'Critical', icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 1L15 14H1L8 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="8" y1="6" x2="8" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12.5" r="0.75" fill="currentColor"/></svg>' },
