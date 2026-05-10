@@ -785,11 +785,11 @@
       font-family: inherit;
       font-size: 13px;
       font-weight: 600;
-      padding: 8px 16px;
+      padding: 7px 16px;
       border-radius: var(--radius-pill);
-      border: 1px solid var(--accent);
-      background: var(--accent-bg);
-      color: var(--accent-bright);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      background: transparent;
+      color: #fff;
       cursor: pointer;
       transition: all var(--transition);
       display: inline-flex;
@@ -799,8 +799,8 @@
     }
 
     .print-btn:hover {
-      background: var(--accent);
-      color: #fff;
+      border-color: #fff;
+      background: rgba(255,255,255,0.08);
     }
 
     /* ── Scroll Indicator ─────────────────────────── */
@@ -1333,10 +1333,7 @@
     <section id="pos-section" style="scroll-margin-top: 100px;">
       <div class="section-header">
         <div class="section-label">Payment Flows</div>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
-          <h1 class="section-title" id="pos-section-title">Choose your POS system</h1>
-          <a class="print-btn" id="section-print-btn" href="#" target="_blank" style="display:none;flex-shrink:0"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 6V1h8v5M4 12H2.5A1.5 1.5 0 011 10.5v-4A1.5 1.5 0 012.5 5h11A1.5 1.5 0 0115 6.5v4a1.5 1.5 0 01-1.5 1.5H12M4 9h8v6H4V9z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Print Instructions</a>
-        </div>
+        <h1 class="section-title" id="pos-section-title">Choose your POS system</h1>
         <p class="section-subtitle" id="pos-section-subtitle">Select your POS system to view step-by-step payment instructions.</p>
       </div>
       <div id="pos-chain"></div>
@@ -1495,12 +1492,12 @@
           '@On Micros POS',
           'Tap <strong>Other Payments</strong>',
           'Enter <strong data-removed>Grand Total</strong> from Blackbird Terminal',
-          '!warn:Micros requires the <strong data-removed>Grand Total</strong> (balance + tip combined), not just the tip separately. The Blackbird Terminal calculates this for you.',
           'Close check to <strong>Blackbird Pay</strong> tender type &rarr; <strong>Yes</strong>',
           '@On Blackbird Terminal',
           'Tap <strong>Done</strong>',
           'Tell the guest they are good to go'
         ],
+        closeoutNote: { text: 'Micros requires the <strong data-removed>Grand Total</strong> (balance + tip combined), not just the tip separately. The Blackbird Terminal calculates this for you.', type: 'warn' },
         notes: []
       },
       'lightspeed-fsr': {
@@ -1740,6 +1737,20 @@
       // Flow steps column
       html += '<div>';
 
+      // Print button toolbar — right-aligned, just above the step columns
+      if (cardFile) {
+        const printIcon = '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M4 6V1h8v5M4 12H2.5A1.5 1.5 0 011 10.5v-4A1.5 1.5 0 012.5 5h11A1.5 1.5 0 0115 6.5v4a1.5 1.5 0 01-1.5 1.5H12M4 9h8v6H4V9z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        html += `<div style="display:flex;justify-content:flex-end;margin-bottom:16px">`;
+        html += `<a class="print-btn" href="source%20materials/cards/${encodeURIComponent(cardFile)}" target="_blank">${printIcon} Print Instructions</a>`;
+        html += `</div>`;
+      }
+
+      const noteMetaMap = {
+        warn: { cls: 'flow-note-warn', label: 'Critical', icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 1L15 14H1L8 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="8" y1="6" x2="8" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12.5" r="0.75" fill="currentColor"/></svg>' },
+        tip:  { cls: 'flow-note-tip',  label: 'Tip',      icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
+        info: { cls: 'flow-note-info', label: 'Note',     icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
+      };
+
       if (data.checkin) {
         html += '<div class="flow-columns">';
         html += '<div class="flow-section">';
@@ -1749,6 +1760,10 @@
         html += '<div class="flow-section">';
         html += '<div class="flow-section-title">When a guest is <span class="highlight-closeout">ready to close out</span></div>';
         html += '<ol class="flow-steps">' + renderSteps(data.closeout) + '</ol>';
+        if (data.closeoutNote) {
+          const m = noteMetaMap[data.closeoutNote.type] || noteMetaMap.info;
+          html += `<div class="flow-note ${m.cls}" style="margin-top:10px"><div class="flow-note-label">${m.icon} ${m.label}</div>${data.closeoutNote.text}</div>`;
+        }
         html += '</div>';
         html += '</div>';
       } else if (data.flow) {
@@ -1762,13 +1777,8 @@
       // Notes column (right side if present)
       if (hasNotes) {
         html += '<div class="flow-view-notes">';
-        const noteMeta = {
-          warn: { cls: 'flow-note-warn', label: 'Critical', icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 1L15 14H1L8 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="8" y1="6" x2="8" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12.5" r="0.75" fill="currentColor"/></svg>' },
-          tip:  { cls: 'flow-note-tip',  label: 'Tip',      icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
-          info: { cls: 'flow-note-info', label: 'Note',     icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
-        };
         data.notes.forEach(n => {
-          const meta = noteMeta[n.type] || noteMeta.info;
+          const meta = noteMetaMap[n.type] || noteMetaMap.info;
           html += `<div class="flow-note ${meta.cls}">`;
           html += `<div class="flow-note-label">${meta.icon} ${meta.label}</div>`;
           html += n.text;
@@ -1809,17 +1819,6 @@
           : data.name;
       }
       if (subtitleEl) subtitleEl.style.display = 'none';
-
-      // Show print button in header
-      const printBtn = document.getElementById('section-print-btn');
-      if (printBtn) {
-        if (cardFile) {
-          printBtn.href = `source%20materials/cards/${encodeURIComponent(cardFile)}`;
-          printBtn.style.display = 'inline-flex';
-        } else {
-          printBtn.style.display = 'none';
-        }
-      }
 
       // Draw connectors after a brief delay for animations to settle
       requestAnimationFrame(() => requestAnimationFrame(drawConnectors));
