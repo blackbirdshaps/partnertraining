@@ -608,17 +608,20 @@
       display: none;
     }
 
-    /* Step with note displayed beside it */
+    /* Step with note displayed beside it — note is absolute so it never affects row height */
     .flow-steps li.has-aside {
-      align-items: flex-start;
-      gap: 10px;
-    }
-    .flow-steps li.has-aside::before {
-      margin-top: 3px;
+      align-items: center;
+      position: relative;
+      overflow: visible;
+      padding-right: 172px;
     }
     .flow-aside-note {
-      width: 180px;
-      flex-shrink: 0;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 156px;
+      z-index: 1;
     }
 
     .flow-note {
@@ -1505,8 +1508,8 @@
           '@On Micros POS',
           'Tap <strong>Other Payments</strong>',
           'Enter <strong data-removed>Grand Total</strong> from Blackbird Terminal',
-          '!warn:Micros requires the <strong data-removed>Grand Total</strong> (balance + tip combined), not just the tip separately. The Blackbird Terminal calculates this for you.',
           'Close check to <strong>Blackbird Pay</strong> tender type &rarr; <strong>Yes</strong>',
+          '!warn:Micros requires the <strong data-removed>Grand Total</strong> (balance + tip combined), not just the tip separately. The Blackbird Terminal calculates this for you.',
           '@On Blackbird Terminal',
           'Tap <strong>Done</strong>',
           'Tell the guest they are good to go'
