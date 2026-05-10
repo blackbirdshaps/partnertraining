@@ -598,6 +598,16 @@
       display: none;
     }
 
+    .flow-steps li.flow-inline-note {
+      counter-increment: none;
+      padding: 4px 0;
+      border: none;
+      background: none;
+    }
+    .flow-steps li.flow-inline-note::before {
+      display: none;
+    }
+
     .flow-note {
       border-radius: var(--radius-sm);
       padding: 11px 14px 12px 14px;
@@ -1485,14 +1495,13 @@
           '@On Micros POS',
           'Tap <strong>Other Payments</strong>',
           'Enter <strong data-removed>Grand Total</strong> from Blackbird Terminal',
+          '!warn:Micros requires the <strong data-removed>Grand Total</strong> (balance + tip combined), not just the tip separately. The Blackbird Terminal calculates this for you.',
           'Close check to <strong>Blackbird Pay</strong> tender type &rarr; <strong>Yes</strong>',
           '@On Blackbird Terminal',
           'Tap <strong>Done</strong>',
           'Tell the guest they are good to go'
         ],
-        notes: [
-          { text: 'Micros requires the <strong data-removed>Grand Total</strong> (balance + tip combined), not just the tip separately. The Blackbird Terminal calculates this for you.', type: 'warn' }
-        ]
+        notes: []
       },
       'lightspeed-fsr': {
         name: 'Lightspeed', type: 'Full Service Restaurant', typeClass: 'type-fsr',
@@ -1704,9 +1713,19 @@
 
       // Helper: render steps with @ device headers
       function renderSteps(steps) {
+        const inlineMeta = {
+          warn: { cls: 'flow-note-warn', label: 'Critical', icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 1L15 14H1L8 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="8" y1="6" x2="8" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12.5" r="0.75" fill="currentColor"/></svg>' },
+          tip:  { cls: 'flow-note-tip',  label: 'Tip',      icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
+          info: { cls: 'flow-note-info', label: 'Note',     icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
+        };
         return steps.map(s => {
           if (typeof s === 'string' && s.startsWith('@')) {
             return `<li class="device-label">${s.substring(1)}</li>`;
+          }
+          const noteMatch = typeof s === 'string' && s.match(/^!(warn|tip|info):([\s\S]*)/);
+          if (noteMatch) {
+            const meta = inlineMeta[noteMatch[1]] || inlineMeta.info;
+            return `<li class="flow-inline-note"><div class="flow-note ${meta.cls}"><div class="flow-note-label">${meta.icon} ${meta.label}</div>${noteMatch[2]}</div></li>`;
           }
           return `<li><span>${s}</span></li>`;
         }).join('');
