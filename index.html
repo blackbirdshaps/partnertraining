@@ -608,6 +608,19 @@
       display: none;
     }
 
+    /* Step with note displayed beside it */
+    .flow-steps li.has-aside {
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .flow-steps li.has-aside::before {
+      margin-top: 3px;
+    }
+    .flow-aside-note {
+      width: 180px;
+      flex-shrink: 0;
+    }
+
     .flow-note {
       border-radius: var(--radius-sm);
       padding: 11px 14px 12px 14px;
@@ -787,7 +800,7 @@
       font-weight: 600;
       padding: 7px 16px;
       border-radius: var(--radius-pill);
-      border: 1.5px solid rgba(255,255,255,0.35);
+      border: 1.5px solid var(--accent);
       background: transparent;
       color: #fff;
       cursor: pointer;
@@ -1492,12 +1505,12 @@
           '@On Micros POS',
           'Tap <strong>Other Payments</strong>',
           'Enter <strong data-removed>Grand Total</strong> from Blackbird Terminal',
+          '!warn:Micros requires the <strong data-removed>Grand Total</strong> (balance + tip combined), not just the tip separately. The Blackbird Terminal calculates this for you.',
           'Close check to <strong>Blackbird Pay</strong> tender type &rarr; <strong>Yes</strong>',
           '@On Blackbird Terminal',
           'Tap <strong>Done</strong>',
           'Tell the guest they are good to go'
         ],
-        closeoutNote: { text: 'Micros requires the <strong data-removed>Grand Total</strong> (balance + tip combined), not just the tip separately. The Blackbird Terminal calculates this for you.', type: 'warn' },
         notes: []
       },
       'lightspeed-fsr': {
@@ -1548,14 +1561,13 @@
           'Tap <strong>Take Payment</strong>',
           'Select <strong>Blackbird Pay</strong> tender type',
           'Enter the <strong data-removed>Grand Total</strong> from Blackbird Terminal',
+          '!warn:SpotOn requires the <strong data-removed>Grand Total</strong> (balance + tip combined), not just the tip separately. The Blackbird Terminal calculates this for you.',
           'Select <strong>Blackbird Pay</strong> tender type again, then tap <strong>Done</strong>',
           '@On Blackbird Terminal',
           'Tap <strong>Done</strong>',
           'Tell the guest they are good to go'
         ],
-        notes: [
-          { text: 'Like Micros, SpotOn requires the <strong data-removed>Grand Total</strong> (balance + tip combined). The Blackbird Terminal calculates this for you.', type: 'warn' }
-        ]
+        notes: []
       }
     };
 
@@ -1715,17 +1727,30 @@
           tip:  { cls: 'flow-note-tip',  label: 'Tip',      icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
           info: { cls: 'flow-note-info', label: 'Note',     icon: '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="7" x2="8" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.5" r="0.75" fill="currentColor"/></svg>' },
         };
-        return steps.map(s => {
-          if (typeof s === 'string' && s.startsWith('@')) {
-            return `<li class="device-label">${s.substring(1)}</li>`;
+        const result = [];
+        for (let i = 0; i < steps.length; i++) {
+          const s = steps[i];
+          if (s.startsWith('@')) {
+            result.push(`<li class="device-label">${s.substring(1)}</li>`);
+            continue;
           }
-          const noteMatch = typeof s === 'string' && s.match(/^!(warn|tip|info):([\s\S]*)/);
-          if (noteMatch) {
-            const meta = inlineMeta[noteMatch[1]] || inlineMeta.info;
-            return `<li class="flow-inline-note"><div class="flow-note ${meta.cls}"><div class="flow-note-label">${meta.icon} ${meta.label}</div>${noteMatch[2]}</div></li>`;
+          const next = steps[i + 1];
+          const asideMatch = next && next.match(/^!(warn|tip|info):([\s\S]*)/);
+          if (asideMatch) {
+            const meta = inlineMeta[asideMatch[1]] || inlineMeta.info;
+            result.push(`<li class="has-aside"><span>${s}</span><div class="flow-note ${meta.cls} flow-aside-note"><div class="flow-note-label">${meta.icon} ${meta.label}</div>${asideMatch[2]}</div></li>`);
+            i++;
+            continue;
           }
-          return `<li><span>${s}</span></li>`;
-        }).join('');
+          const selfMatch = s.match(/^!(warn|tip|info):([\s\S]*)/);
+          if (selfMatch) {
+            const meta = inlineMeta[selfMatch[1]] || inlineMeta.info;
+            result.push(`<li class="flow-inline-note"><div class="flow-note ${meta.cls}"><div class="flow-note-label">${meta.icon} ${meta.label}</div>${selfMatch[2]}</div></li>`);
+            continue;
+          }
+          result.push(`<li><span>${s}</span></li>`);
+        }
+        return result.join('');
       }
 
       const hasNotes = data.notes && data.notes.length;
