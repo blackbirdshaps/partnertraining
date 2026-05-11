@@ -537,11 +537,17 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 6px 0;
+      padding: 10px 0;
       border-bottom: 1px solid rgba(255,255,255,0.04);
       font-size: 14px;
       line-height: 1.4;
       color: var(--text-secondary);
+      transition: background 0.15s ease;
+      border-radius: 6px;
+    }
+
+    .flow-steps li:not(.device-label):not(.flow-inline-note):hover {
+      background: rgba(255,255,255,0.025);
     }
 
     .flow-steps li:last-child {
@@ -590,17 +596,28 @@
 
     .flow-steps li.device-label {
       counter-increment: none;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-muted);
-      padding: 16px 0 2px;
+      padding: 14px 0 6px;
       border-bottom: none;
+      background: none;
     }
 
     .flow-steps li.device-label::before {
       display: none;
+    }
+
+    .device-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-pill);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--accent-bright);
     }
 
     .flow-steps li.flow-inline-note {
@@ -1198,11 +1215,19 @@
     }
 
     /* ── Selection Chain (breadcrumb) ─────────────── */
+    .pos-chain-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 4px;
+    }
+
     .selection-chain {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 24px;
+      margin-bottom: 0;
       flex-wrap: wrap;
     }
 
@@ -1357,7 +1382,10 @@
         <h1 class="section-title" id="pos-section-title">Choose your POS system</h1>
         <p class="section-subtitle" id="pos-section-subtitle">Select your POS system to view step-by-step payment instructions.</p>
       </div>
-      <div id="pos-chain"></div>
+      <div class="pos-chain-row">
+        <div id="pos-chain"></div>
+        <div id="pos-print-area"></div>
+      </div>
       <div id="pos-content">
         <!-- JS renders the current view here -->
       </div>
@@ -1626,6 +1654,8 @@
 
     function renderChain(steps) {
       // steps: array of { label, onclick } — last one is current (not clickable)
+      const printArea = document.getElementById('pos-print-area');
+      if (printArea && (!steps || steps.length === 0)) printArea.innerHTML = '';
       if (!steps || steps.length === 0) {
         chainEl.innerHTML = '';
         return;
@@ -1738,7 +1768,8 @@
         for (let i = 0; i < steps.length; i++) {
           const s = steps[i];
           if (s.startsWith('@')) {
-            result.push(`<li class="device-label">${s.substring(1)}</li>`);
+            const devIcon = '<svg width="11" height="11" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M5 14h6M8 11v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+            result.push(`<li class="device-label"><span class="device-switch">${devIcon}${s.substring(1)}</span></li>`);
             continue;
           }
           const next = steps[i + 1];
@@ -1763,14 +1794,6 @@
       const hasNotes = data.notes && data.notes.length;
       const cardFile = cardPDFs[posId];
       html += `<div class="flow-view ${hasNotes ? 'has-notes' : ''} flow-animate">`;
-
-      // Print button — full-width row so it sits at the far right of the content area
-      if (cardFile) {
-        const printIcon = '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M4 6V1h8v5M4 12H2.5A1.5 1.5 0 011 10.5v-4A1.5 1.5 0 012.5 5h11A1.5 1.5 0 0115 6.5v4a1.5 1.5 0 01-1.5 1.5H12M4 9h8v6H4V9z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        html += `<div style="display:flex;justify-content:flex-end;margin-bottom:16px">`;
-        html += `<a class="print-btn" href="source%20materials/cards/${encodeURIComponent(cardFile)}" target="_blank">${printIcon} Print Instructions</a>`;
-        html += `</div>`;
-      }
 
       html += '<div class="flow-view-main">';
 
@@ -1838,6 +1861,17 @@
       html += '</div>'; // .flow-view-main
       html += '</div>'; // .flow-view
       container.innerHTML = html;
+
+      // Inject print button into the breadcrumb row
+      const printArea = document.getElementById('pos-print-area');
+      if (printArea) {
+        if (cardFile) {
+          const printIcon = '<svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M4 6V1h8v5M4 12H2.5A1.5 1.5 0 011 10.5v-4A1.5 1.5 0 012.5 5h11A1.5 1.5 0 0115 6.5v4a1.5 1.5 0 01-1.5 1.5H12M4 9h8v6H4V9z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          printArea.innerHTML = `<a class="print-btn" href="source%20materials/cards/${encodeURIComponent(cardFile)}" target="_blank">${printIcon} Print Instructions</a>`;
+        } else {
+          printArea.innerHTML = '';
+        }
+      }
 
       // Update section header to show the selected POS name
       const titleEl = document.getElementById('pos-section-title');
