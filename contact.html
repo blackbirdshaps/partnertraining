@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact & Help – Blackbird Partner Hub</title>
+  <title>Contact – Blackbird Partner Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
@@ -216,6 +216,69 @@
       line-height: 1.4;
     }
 
+    /* ── Website CTA ─────────────────────────────── */
+    .website-cta {
+      margin-bottom: 40px;
+    }
+
+    .website-cta-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 200ms ease, box-shadow 200ms ease;
+    }
+
+    .website-cta-link:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(76,95,249,0.12);
+    }
+
+    .website-cta-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .website-cta-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--accent-bg);
+      color: var(--accent-bright);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .website-cta-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .website-cta-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .website-cta-arrow {
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: color 200ms ease, transform 200ms ease;
+    }
+
+    .website-cta-link:hover .website-cta-arrow {
+      color: var(--accent-bright);
+      transform: translateX(3px);
+    }
+
     /* ── Social ──────────────────────────────────── */
     .social-section {
       margin-top: 8px;
@@ -328,7 +391,7 @@
         <a href="index.html" class="header-badge">Blackbird Pay Instructions</a>
         <a href="faq.html" class="header-badge">FAQs</a>
         <a href="videos.html" class="header-badge">Training Videos</a>
-        <div class="header-badge active header-badge-contact">Contact Support</div>
+        <div class="header-badge active header-badge-contact">Contact</div>
       </nav>
     </div>
   </header>
@@ -337,7 +400,7 @@
 
     <div class="section-header">
       <div class="section-label">Support</div>
-      <h1 class="section-title">Contact & Help</h1>
+      <h1 class="section-title">Contact</h1>
       <p class="section-subtitle">Reach the Blackbird Support team via email or text. We got you.</p>
     </div>
 
@@ -356,9 +419,28 @@
       </div>
     </div>
 
+    <div class="website-cta">
+      <a href="https://www.blackbird.xyz/" target="_blank" rel="noopener" class="website-cta-link">
+        <div class="website-cta-inner">
+          <div class="website-cta-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div>
+            <div class="website-cta-title">Visit blackbird.xyz</div>
+            <div class="website-cta-desc">Learn more about Blackbird, our mission, and what we offer restaurant partners.</div>
+          </div>
+        </div>
+        <svg class="website-cta-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
     <div class="social-section">
       <div class="social-label">Follow Blackbird</div>
       <div class="social-links">
+        <a href="https://www.blackbird.xyz/news" target="_blank" rel="noopener" class="social-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg>
+          Newsroom
+        </a>
         <a href="https://x.com/blackbird" target="_blank" rel="noopener" class="social-link">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           X
