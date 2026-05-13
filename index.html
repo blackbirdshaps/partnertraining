@@ -213,14 +213,15 @@
       background: var(--surface);
       border: 1.5px solid var(--border-hover);
       border-radius: 14px;
-      padding: 36px 28px;
+      padding: 22px 24px 20px;
       cursor: pointer;
       transition: all var(--transition);
       position: relative;
       overflow: hidden;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
       min-height: 110px;
     }
 
@@ -269,11 +270,10 @@
     }
 
     .pos-card-name {
-      font-size: 26px;
+      font-size: 20px;
       font-weight: 700;
       letter-spacing: -0.02em;
-      text-align: center;
-      width: 100%;
+      margin-bottom: 6px;
     }
 
     .pos-card-desc {
@@ -362,30 +362,53 @@
     }
 
     /* ── Other POS flow ───────────────────────────── */
-    .other-video-wrap {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
+    .other-video-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 8px 0 28px;
+      padding: 16px 20px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
       border-radius: var(--radius-lg);
-      overflow: hidden;
-      background: #000;
-      margin: 4px 0 28px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color var(--transition), background var(--transition);
     }
 
-    .other-video-wrap iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: none;
+    .other-video-link:hover {
+      border-color: var(--accent);
+      background: rgba(76,95,249,0.05);
     }
 
-    .other-video-label {
-      font-size: 11px;
+    .other-video-link-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .other-video-link-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      background: rgba(44,225,152,0.1);
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .other-video-link-title {
+      font-size: 14px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
+      margin-bottom: 2px;
+    }
+
+    .other-video-link-sub {
+      font-size: 12px;
       color: var(--text-muted);
-      margin-bottom: 10px;
     }
 
     .other-contact-cta {
@@ -1902,8 +1925,10 @@
       html += `<div class="pos-grid ${shouldAnimate ? 'grid-animate' : ''}">`;
       posCards.forEach(card => {
         html += `<div class="pos-card" onclick="selectPOS(this, '${card.id}')">`;
+        html += `<div class="pos-card-types"><span class="pos-card-type ${card.typeClass}">${card.typeLabel}</span></div>`;
         html += `<div class="pos-card-name">${card.name}</div>`;
-        html += '<div class="pos-card-arrow">&rarr;</div>';
+        html += `<div class="pos-card-desc">${card.desc}</div>`;
+        html += '<div class="pos-card-arrow">→</div>';
         html += '</div>';
       });
       html += '</div>';
@@ -1948,13 +1973,10 @@
         'Payment is processed automatically — the guest receives a receipt in the Blackbird app',
       ];
 
-      const pill = (t) => `<span style="display:inline-flex;align-items:center;padding:1px 8px;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:12px;font-weight:500;background:rgba(255,255,255,0.08)">${t}</span>`;
-
-      let stepsHtml = (steps) => steps.map((s, i) => `<li><span>${s}</span></li>`).join('');
+      let stepsHtml = (steps) => steps.map((s) => `<li><span>${s}</span></li>`).join('');
 
       let html = '<div class="flow-view flow-animate">';
       html += '<div class="flow-view-main"><div>';
-      html += '<div class="flow-columns">';
 
       html += '<div class="flow-section">';
       html += `<div class="flow-section-title"><span>When a guest <span class="highlight-checkin">checks in</span></span><span class="step-count-badge">${checkinSteps.length} steps</span></div>`;
@@ -1966,11 +1988,17 @@
       html += `<ol class="flow-steps">${stepsHtml(closeoutSteps)}</ol>`;
       html += '</div>';
 
-      html += '</div>'; // .flow-columns
-
-      // Video embed
-      html += '<div class="other-video-label" style="margin-top:28px">Pay Flow Demo — Full Service</div>';
-      html += '<div class="other-video-wrap"><iframe src="https://blackbird.navattic.com/xp1c07o3" allowfullscreen allow="fullscreen"></iframe></div>';
+      // Video link card
+      html += `<a href="https://blackbird.navattic.com/xp1c07o3" target="_blank" rel="noopener" class="other-video-link">
+        <div class="other-video-link-left">
+          <div class="other-video-link-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+          <div>
+            <div class="other-video-link-title">Pay Flow Demo — Full Service</div>
+            <div class="other-video-link-sub">Interactive walkthrough · Opens in a new tab</div>
+          </div>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-muted);flex-shrink:0"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>`;
 
       // Contact CTA
       html += `<div class="other-contact-cta">
@@ -1991,7 +2019,7 @@
         </div>
       </div>`;
 
-      html += '</div></div>'; // close flow-view-main columns
+      html += '</div></div>'; // close flow-view-main inner + outer
       html += '</div>'; // .flow-view
 
       // Quick FAQs
