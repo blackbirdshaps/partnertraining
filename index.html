@@ -462,6 +462,18 @@
       text-decoration: underline;
     }
 
+    .faq-pill {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 6px;
+      padding: 1px 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      vertical-align: baseline;
+    }
+
     .flow-view-header {
       display: flex;
       align-items: center;
@@ -1682,10 +1694,14 @@
 
     // ── POS-Specific FAQ Data (from Figma training cards) ──
     // Full FAQ data from Figma back cards — shown in sidebar next to flow
+    const universalFAQs = [
+      { q: 'You are logged out of the Blackbird Terminal', a: 'Your login credentials are auto-saved. To access:<br>→ Tap <span class="faq-pill">Log In</span><br>→ Tap into the <span class="faq-pill">Email address</span> field<br>→ Tap <span class="faq-pill">Sign In</span>' },
+      { q: 'You don\'t know your PIN code', a: 'It defaults to the last 4 digits of the phone number linked to your Blackbird account.<br><br>If you don\'t have a Blackbird account, you won\'t have a PIN — use the manager PIN instead.' },
+    ];
+
     const posFAQs = {
       'fsr': [
         { q: 'The table wants to split a check', a: 'If everyone is paying with Blackbird, have them tap <strong>Split the Check</strong> — this creates one combined check on the Terminal. If only some are using Blackbird, split the check in your POS. First, close out the non-Blackbird guests, then close out the Blackbird guests.' },
-        { q: 'You are logged out of the Blackbird Terminal', a: 'Your login credentials are auto-saved. To access: Tap <strong>Log In</strong> &rarr; Tap into the <strong>Email address</strong> field &rarr; Tap <strong>Sign In</strong>.' },
         { q: 'Your restaurant has an auto-gratuity policy', a: 'Auto-gratuity is already added to the check. Remind guests to set their in-app tip to 0% if they don\'t want to add an additional tip.' },
         { q: 'How to pre-authorize a charge', a: 'This feature lets you place a temporary hold on a guest\'s payment method for the amount of their order mid-service. This ensures the card is valid and funds are available, giving you confidence the payment will clear when the check is closed.<br><br><strong>On the Blackbird Terminal:</strong><ol style="margin:8px 0 0 16px"><li>Tap the guest tab</li><li>Tap <strong>Pre-Authorize</strong></li><li>Enter the amount, usually equal to the amount of the guest\'s order thus far</li><li>Blackbird attempts to pre-authorize the payment</li><li>If pre-authorization fails, <strong>collect another form of payment outside of Blackbird Pay</strong><br><em style="font-style:italic;opacity:0.8">Blackbird will not honor any payment after a failed pre-authorization</em></li></ol>' }
       ],
@@ -1925,8 +1941,9 @@
 
       html += '</div>'; // .flow-view-main
 
-      // Quick FAQs below the flow — only shown for QSR systems
-      const faqs = posId.endsWith('-qsr') ? (posFAQs[posId] || []) : [];
+      // Quick FAQs — universal FAQs + any POS-specific ones
+      const posSpecificFaqs = posId.endsWith('-qsr') ? (posFAQs[posId] || []) : (posFAQs['fsr'] || []);
+      const faqs = universalFAQs.concat(posSpecificFaqs);
       if (faqs && faqs.length) {
         html += '<div class="flow-view-faq">';
         html += '<div class="flow-view-faq-title">Quick FAQs</div>';
