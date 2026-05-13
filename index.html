@@ -296,6 +296,137 @@
       transform: translateY(-50%) translateX(2px);
     }
 
+    /* ── Other POS banner ────────────────────────── */
+    .other-pos-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 22px;
+      margin-top: -32px;
+      margin-bottom: 40px;
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: border-color var(--transition), background var(--transition);
+      background: transparent;
+      width: 100%;
+      text-align: left;
+    }
+
+    .other-pos-banner:hover {
+      border-color: var(--border-hover);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .other-pos-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .other-pos-banner-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .other-pos-banner-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .other-pos-banner-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .other-pos-banner-arrow {
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: color var(--transition), transform var(--transition);
+    }
+
+    .other-pos-banner:hover .other-pos-banner-arrow {
+      color: var(--text-secondary);
+      transform: translateX(3px);
+    }
+
+    /* ── Other POS flow ───────────────────────────── */
+    .other-video-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #000;
+      margin: 4px 0 28px;
+    }
+
+    .other-video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    .other-video-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .other-contact-cta {
+      margin-top: 32px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+    }
+
+    .other-contact-cta-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .other-contact-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .other-contact-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .other-contact-row svg { color: var(--accent-bright); flex-shrink: 0; }
+
+    .other-contact-row a {
+      color: var(--accent-bright);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .other-contact-row a:hover { text-decoration: underline; }
+
     /* ── Service Type Picker (inline) ─────────────── */
     .service-type-picker {
       display: grid;
@@ -1776,6 +1907,16 @@
         html += '</div>';
       });
       html += '</div>';
+      html += `<button class="other-pos-banner" onclick="renderOtherPOS()">
+        <div class="other-pos-banner-left">
+          <div class="other-pos-banner-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg></div>
+          <div>
+            <div class="other-pos-banner-label">My POS isn't listed</div>
+            <div class="other-pos-banner-sub">Generic payment flow + contact your account manager</div>
+          </div>
+        </div>
+        <svg class="other-pos-banner-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>`;
       container.innerHTML = html;
       if (scrollIndicatorEl) scrollIndicatorEl.classList.remove('visible');
 
@@ -1786,6 +1927,88 @@
       if (subtitleEl) { subtitleEl.style.display = ''; subtitleEl.textContent = 'Select your POS system to view step-by-step payment instructions.'; }
       const printBtn = document.getElementById('section-print-btn');
       if (printBtn) printBtn.style.display = 'none';
+    }
+
+    function renderOtherPOS() {
+      renderChain([
+        { label: 'All POS Systems', onclick: 'renderGrid(true)' },
+        { label: 'My POS isn\'t listed' }
+      ]);
+
+      const checkinSteps = [
+        'Guest checks in via the Blackbird app — their name appears on the Blackbird Terminal under <strong>Open Tabs</strong>',
+        'Assign their check in your POS as you normally would',
+      ];
+      const closeoutSteps = [
+        'When the guest is ready to pay, open their check in your POS',
+        'On the Blackbird Terminal, locate the guest under <strong>Open Tabs</strong> and tap their name',
+        'Enter the balance due (do not include tip yet) — the guest confirms and adds a tip in the Blackbird app',
+        'In your POS, close the check to a <strong>Blackbird Pay</strong> tender type',
+        'Enter the total amount (balance + tip combined) when prompted',
+        'Payment is processed automatically — the guest receives a receipt in the Blackbird app',
+      ];
+
+      const pill = (t) => `<span style="display:inline-flex;align-items:center;padding:1px 8px;border:1px solid rgba(255,255,255,0.15);border-radius:6px;font-size:12px;font-weight:500;background:rgba(255,255,255,0.08)">${t}</span>`;
+
+      let stepsHtml = (steps) => steps.map((s, i) => `<li><span>${s}</span></li>`).join('');
+
+      let html = '<div class="flow-view flow-animate">';
+      html += '<div class="flow-view-main"><div>';
+      html += '<div class="flow-columns">';
+
+      html += '<div class="flow-section">';
+      html += `<div class="flow-section-title"><span>When a guest <span class="highlight-checkin">checks in</span></span><span class="step-count-badge">${checkinSteps.length} steps</span></div>`;
+      html += `<ol class="flow-steps">${stepsHtml(checkinSteps)}</ol>`;
+      html += '</div>';
+
+      html += '<div class="flow-section">';
+      html += `<div class="flow-section-title"><span>When a guest is <span class="highlight-closeout">ready to close out</span></span><span class="step-count-badge">${closeoutSteps.length} steps</span></div>`;
+      html += `<ol class="flow-steps">${stepsHtml(closeoutSteps)}</ol>`;
+      html += '</div>';
+
+      html += '</div>'; // .flow-columns
+
+      // Video embed
+      html += '<div class="other-video-label" style="margin-top:28px">Pay Flow Demo — Full Service</div>';
+      html += '<div class="other-video-wrap"><iframe src="https://blackbird.navattic.com/xp1c07o3" allowfullscreen allow="fullscreen"></iframe></div>';
+
+      // Contact CTA
+      html += `<div class="other-contact-cta">
+        <div class="other-contact-cta-title">Questions? Reach out to Partner Support or your Account Manager</div>
+        <div class="other-contact-rows">
+          <div class="other-contact-row">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Partner Support: <a href="mailto:partners@blackbird.xyz">partners@blackbird.xyz</a>
+          </div>
+          <div class="other-contact-row">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Partner Text Line: <a href="tel:6467989362">(646) 798-9362</a>
+          </div>
+          <div class="other-contact-row">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Or contact your <strong style="color:var(--text)">Blackbird Account Manager</strong> directly
+          </div>
+        </div>
+      </div>`;
+
+      html += '</div></div>'; // close flow-view-main columns
+      html += '</div>'; // .flow-view
+
+      // Quick FAQs
+      const faqs = universalFAQs;
+      if (faqs.length) {
+        html += '<div class="flow-view-faq">';
+        html += '<div class="flow-view-faq-title">Quick FAQs</div>';
+        faqs.forEach(faq => {
+          html += '<div class="quick-faq-item">';
+          html += `<div class="quick-faq-q" onclick="toggleQuickFaq(this)">${faq.q}<svg class="qfaq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>`;
+          html += `<div class="quick-faq-a"><div class="quick-faq-a-inner">${faq.a}</div></div>`;
+          html += '</div>';
+        });
+        html += '</div>';
+      }
+
+      container.innerHTML = html;
     }
 
     function selectPOS(el, posName) {
