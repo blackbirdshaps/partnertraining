@@ -296,40 +296,39 @@
       transform: translateY(-50%) translateX(2px);
     }
 
-    /* ── Other POS banner ────────────────────────── */
-    .other-pos-banner {
+    /* ── Other POS card (spans full grid width) ─────── */
+    .pos-card-other {
+      grid-column: 1 / -1;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 16px 22px;
-      margin-top: -32px;
-      margin-bottom: 40px;
-      border: 1.5px dashed var(--border);
-      border-radius: var(--radius-lg);
+      padding: 18px 24px;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
       cursor: pointer;
       transition: border-color var(--transition), background var(--transition);
-      background: transparent;
       width: 100%;
       text-align: left;
     }
 
-    .other-pos-banner:hover {
+    .pos-card-other:hover {
       border-color: var(--border-hover);
       background: rgba(255,255,255,0.02);
     }
 
-    .other-pos-banner-left {
+    .pos-card-other-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
-    .other-pos-banner-icon {
-      width: 32px;
-      height: 32px;
+    .pos-card-other-icon {
+      width: 34px;
+      height: 34px;
       border-radius: 8px;
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.04);
       border: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -338,25 +337,25 @@
       flex-shrink: 0;
     }
 
-    .other-pos-banner-label {
-      font-size: 14px;
-      font-weight: 600;
+    .pos-card-other-label {
+      font-size: 16px;
+      font-weight: 700;
       color: var(--text-secondary);
     }
 
-    .other-pos-banner-sub {
+    .pos-card-other-sub {
       font-size: 12px;
       color: var(--text-muted);
-      margin-top: 1px;
+      margin-top: 2px;
     }
 
-    .other-pos-banner-arrow {
+    .pos-card-other-arrow {
       color: var(--text-muted);
       flex-shrink: 0;
       transition: color var(--transition), transform var(--transition);
     }
 
-    .other-pos-banner:hover .other-pos-banner-arrow {
+    .pos-card-other:hover .pos-card-other-arrow {
       color: var(--text-secondary);
       transform: translateX(3px);
     }
@@ -1931,17 +1930,17 @@
         html += '<div class="pos-card-arrow">→</div>';
         html += '</div>';
       });
-      html += '</div>';
-      html += `<button class="other-pos-banner" onclick="renderOtherPOS()">
-        <div class="other-pos-banner-left">
-          <div class="other-pos-banner-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg></div>
+      html += `<button class="pos-card-other" onclick="renderOtherPOS()">
+        <div class="pos-card-other-left">
+          <div class="pos-card-other-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg></div>
           <div>
-            <div class="other-pos-banner-label">My POS isn't listed</div>
-            <div class="other-pos-banner-sub">Generic payment flow + contact your account manager</div>
+            <div class="pos-card-other-label">My POS isn't listed</div>
+            <div class="pos-card-other-sub">Generic payment flow + contact your account manager</div>
           </div>
         </div>
-        <svg class="other-pos-banner-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg class="pos-card-other-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>`;
+      html += '</div>';
       container.innerHTML = html;
       if (scrollIndicatorEl) scrollIndicatorEl.classList.remove('visible');
 
