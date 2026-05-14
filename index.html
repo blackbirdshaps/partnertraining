@@ -361,15 +361,41 @@
     }
 
     /* ── Other POS flow ───────────────────────────── */
+    .other-page-header {
+      margin-bottom: 18px;
+    }
+    .other-page-header-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 5px;
+    }
+    .other-page-header-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .other-steps-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 28px;
+      align-items: start;
+    }
+    @media (max-width: 700px) {
+      .other-steps-columns { grid-template-columns: 1fr; }
+    }
+
     .other-video-link {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin: 8px 0 28px;
+      margin: 0 0 20px;
       padding: 16px 20px;
-      background: var(--surface);
+      background: rgba(44, 225, 152, 0.04);
       border: 1.5px solid var(--border);
+      border-left: 3px solid var(--success);
       border-radius: var(--radius-lg);
       text-decoration: none;
       color: var(--text);
@@ -377,8 +403,9 @@
     }
 
     .other-video-link:hover {
-      border-color: var(--accent);
-      background: rgba(76,95,249,0.05);
+      border-color: var(--success);
+      border-left-color: var(--success);
+      background: rgba(44, 225, 152, 0.08);
     }
 
     .other-video-link-left {
@@ -411,7 +438,7 @@
     }
 
     .other-contact-cta {
-      margin-top: 32px;
+      margin-top: 20px;
       background: var(--surface);
       border: 1.5px solid var(--border);
       border-radius: var(--radius-lg);
@@ -1977,15 +2004,11 @@
       let html = '<div class="flow-view flow-animate">';
       html += '<div class="flow-view-main"><div>';
 
-      html += '<div class="flow-section">';
-      html += `<div class="flow-section-title"><span>When a guest <span class="highlight-checkin">checks in</span></span><span class="step-count-badge">${checkinSteps.length} steps</span></div>`;
-      html += `<ol class="flow-steps">${stepsHtml(checkinSteps)}</ol>`;
-      html += '</div>';
-
-      html += '<div class="flow-section">';
-      html += `<div class="flow-section-title"><span>When a guest is <span class="highlight-closeout">ready to close out</span></span><span class="step-count-badge">${closeoutSteps.length} steps</span></div>`;
-      html += `<ol class="flow-steps">${stepsHtml(closeoutSteps)}</ol>`;
-      html += '</div>';
+      // Page intro header
+      html += `<div class="other-page-header">
+        <div class="other-page-header-title">Generic POS Flow</div>
+        <div class="other-page-header-sub">Your POS isn't listed — follow these universal steps to process Blackbird Pay.</div>
+      </div>`;
 
       // Video link card
       html += `<a href="https://blackbird.navattic.com/xp1c07o3" target="_blank" rel="noopener" class="other-video-link">
@@ -1998,6 +2021,21 @@
         </div>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-muted);flex-shrink:0"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>`;
+
+      // Two-column step sections
+      html += '<div class="other-steps-columns">';
+
+      html += '<div class="flow-section">';
+      html += `<div class="flow-section-title"><span>When a guest <span class="highlight-checkin">checks in</span></span><span class="step-count-badge">${checkinSteps.length} steps</span></div>`;
+      html += `<ol class="flow-steps">${stepsHtml(checkinSteps)}</ol>`;
+      html += '</div>';
+
+      html += '<div class="flow-section">';
+      html += `<div class="flow-section-title"><span>When a guest is <span class="highlight-closeout">ready to close out</span></span><span class="step-count-badge">${closeoutSteps.length} steps</span></div>`;
+      html += `<ol class="flow-steps">${stepsHtml(closeoutSteps)}</ol>`;
+      html += '</div>';
+
+      html += '</div>'; // .other-steps-columns
 
       // Contact CTA
       html += `<div class="other-contact-cta">
