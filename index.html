@@ -386,6 +386,32 @@
       .other-steps-columns { grid-template-columns: 1fr; }
     }
 
+    .other-video-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--success);
+      margin-bottom: 8px;
+    }
+
+    .other-contact-line {
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .other-contact-line a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .other-contact-line a:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+
     .other-video-link {
       display: flex;
       align-items: center;
@@ -1986,6 +2012,11 @@
         { label: 'My POS isn\'t listed' }
       ]);
 
+      const titleEl = document.getElementById('pos-section-title');
+      const subtitleEl = document.getElementById('pos-section-subtitle');
+      if (titleEl) titleEl.innerHTML = `My POS <span style="color:var(--accent-bright);font-weight:700">isn't listed</span>`;
+      if (subtitleEl) subtitleEl.style.display = 'none';
+
       const checkinSteps = [
         'Guest checks in via the Blackbird app — their name appears on the Blackbird Terminal under <strong>Open Tabs</strong>',
         'Assign their check in your POS as you normally would',
@@ -2004,14 +2035,9 @@
       let html = '<div class="flow-view flow-animate">';
       html += '<div class="flow-view-main"><div>';
 
-      // Page intro header
-      html += `<div class="other-page-header">
-        <div class="other-page-header-title">Generic POS Flow</div>
-        <div class="other-page-header-sub">Your POS isn't listed — follow these universal steps to process Blackbird Pay.</div>
-      </div>`;
-
-      // Video link card
-      html += `<a href="https://blackbird.navattic.com/xp1c07o3" target="_blank" rel="noopener" class="other-video-link">
+      // Video card — hero
+      html += `<div class="other-video-eyebrow">Start here</div>
+      <a href="https://blackbird.navattic.com/xp1c07o3" target="_blank" rel="noopener" class="other-video-link">
         <div class="other-video-link-left">
           <div class="other-video-link-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
           <div>
@@ -2037,41 +2063,11 @@
 
       html += '</div>'; // .other-steps-columns
 
-      // Contact CTA
-      html += `<div class="other-contact-cta">
-        <div class="other-contact-cta-title">Questions? Reach out to Partner Support or your Account Manager</div>
-        <div class="other-contact-rows">
-          <div class="other-contact-row">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            Partner Support: <a href="mailto:partners@blackbird.xyz">partners@blackbird.xyz</a>
-          </div>
-          <div class="other-contact-row">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            Partner Text Line: <a href="tel:6467989362">(646) 798-9362</a>
-          </div>
-          <div class="other-contact-row">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Or contact your <strong style="color:var(--text)">Blackbird Account Manager</strong> directly
-          </div>
-        </div>
-      </div>`;
+      // Slim contact line
+      html += `<div class="other-contact-line">Questions? <a href="mailto:partners@blackbird.xyz">partners@blackbird.xyz</a> &nbsp;·&nbsp; <a href="tel:6467989362">(646) 798-9362</a></div>`;
 
       html += '</div></div>'; // close flow-view-main inner + outer
       html += '</div>'; // .flow-view
-
-      // Quick FAQs
-      const faqs = universalFAQs;
-      if (faqs.length) {
-        html += '<div class="flow-view-faq">';
-        html += '<div class="flow-view-faq-title">Quick FAQs</div>';
-        faqs.forEach(faq => {
-          html += '<div class="quick-faq-item">';
-          html += `<div class="quick-faq-q" onclick="toggleQuickFaq(this)">${faq.q}<svg class="qfaq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>`;
-          html += `<div class="quick-faq-a"><div class="quick-faq-a-inner">${faq.a}</div></div>`;
-          html += '</div>';
-        });
-        html += '</div>';
-      }
 
       container.innerHTML = html;
     }
@@ -2106,7 +2102,7 @@
       html += '<div class="service-type-desc">Table service with check-in and close-out flow.</div>';
       html += '</button>';
       html += `<button class="service-type-card" onclick="renderFlow('${posName}-qsr')">`;
-      html += '<div class="service-type-name">Quick Service</div>';
+      html += '<div class="service-type-name">Quick Service / Pay at Counter</div>';
       html += '<div class="service-type-desc">Counter service with code-based or order-matching flow.</div>';
       html += '</button>';
       html += '</div>';
@@ -2122,7 +2118,7 @@
       const displayName = data.name;
       const hasQSR = posCards.find(c => c.id === posName)?.hasQSR;
       const isQSR = posId.endsWith('-qsr');
-      const serviceLabel = isQSR ? 'Quick Service' : 'Full Service';
+      const serviceLabel = isQSR ? 'Quick Service / Pay at Counter' : 'Full Service';
 
       const steps = [{ label: 'All POS Systems', onclick: 'renderGrid(true)' }];
       if (hasQSR) {
@@ -2265,7 +2261,7 @@
       if (titleEl) {
         const posBase = posId.replace(/-fsr$|-qsr$/, '');
         const hasBothVariants = posData[posBase + '-fsr'] && posData[posBase + '-qsr'];
-        const serviceLabel = hasBothVariants ? (posId.endsWith('-qsr') ? ' Quick Service' : ' Full Service') : '';
+        const serviceLabel = hasBothVariants ? (posId.endsWith('-qsr') ? ' Quick Service / Pay at Counter' : ' Full Service') : '';
         titleEl.innerHTML = serviceLabel
           ? `${data.name} <span style="color:var(--accent-bright);font-weight:700">${serviceLabel.trim()}</span>`
           : data.name;

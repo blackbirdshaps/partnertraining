@@ -449,7 +449,8 @@
       transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
     }
 
-    .faq-nav-link:hover {
+    .faq-nav-link:hover,
+    .faq-nav-link.active {
       color: #fff;
       border-color: var(--accent);
       background: var(--accent-bg);
@@ -596,7 +597,7 @@
 
       <div class="accordion-item">
         <button class="accordion-trigger" onclick="toggleAccordion(this)">
-          <span class="accordion-trigger-left">How do guest check-ins work?</span>
+          <span class="accordion-trigger-left">How does a guest check-in?</span>
           <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="accordion-content"><div class="accordion-body">
@@ -612,6 +613,7 @@
         </button>
         <div class="accordion-content"><div class="accordion-body">
           <p>The purple puck is for <strong>employees</strong> — tapping it unlocks <strong>Industry Status</strong> in the Blackbird app, which gives access to exclusive Blackbird-funded perks and rewards designed for restaurant workers.</p>
+          <p>Tapping the purple puck also generates your unique PIN code, which you'll use to close checks on the Blackbird Terminal. Each staff member's default PIN is the last 4 digits of their personal phone number linked to their personal Blackbird account – not the restaurant's phone number.</p>
           <p>Employees must physically tap the purple puck in order to get, and maintain, industry status. (GPS check-ins don't work for this.)</p>
         </div></div>
       </div>
@@ -679,7 +681,8 @@
           <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="accordion-content"><div class="accordion-body">
-          <p>If everyone is paying with Blackbird, have them tap <strong>Split the Check</strong> — this creates one combined check on the Terminal. If only some are using Blackbird, split the check in your POS. First, close out the non-Blackbird guests, then close out the Blackbird guests.</p>
+          <p>If everyone is paying with Blackbird, have them tap <strong>Split the Check</strong> — this creates one combined check on the Terminal.</p>
+          <p>If only some are using Blackbird, split the check in your POS. First, close out the non-Blackbird guests, then close out the Blackbird guests.</p>
         </div></div>
       </div>
 
@@ -695,7 +698,6 @@
             <li>Tap the guest tab</li>
             <li>Tap <strong>Pre-Authorize</strong></li>
             <li>Enter the amount, usually equal to the amount of the guest's order thus far</li>
-            <li>Blackbird attempts to pre-authorize the payment</li>
             <li>If pre-authorization fails, collect another form of payment outside of Blackbird Pay</li>
             <li>Blackbird will not honor any payment after a failed pre-authorization</li>
           </ul>
@@ -721,11 +723,29 @@
 
       <div class="accordion-item">
         <button class="accordion-trigger" onclick="toggleAccordion(this)">
-          <span class="accordion-trigger-left">Your restaurant has an auto-gratuity policy</span>
+          <span class="accordion-trigger-left">Your restaurant has an auto-gratuity / service charge</span>
           <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="accordion-content"><div class="accordion-body">
+          <p><strong>Your restaurant has an auto-gratuity policy</strong></p>
           <p>Auto-gratuity is already added to the check. Remind guests to set their in-app tip to 0% if they don't want to add an additional tip.</p>
+          <p><strong>Your restaurant has a service charge policy</strong></p>
+          <p>A service charge is already included in the check. Remind guests that this is separate from gratuity — any tip added in-app is additional and goes directly to their server.</p>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">How do payouts and reconciliation work?</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p>Payouts are processed twice a week, on Mondays and Thursdays. You'll receive a payout report via email each day payouts are processed.</p>
+          <ul>
+            <li><strong>Monday payouts</strong> cover payments from Thursday through Sunday.</li>
+            <li><strong>Thursday payouts</strong> cover payments from Monday through Wednesday.</li>
+          </ul>
+          <p>To reconcile, log into <strong>Back of House</strong>, our Data &amp; Analytics portal, and navigate to the <strong>Accounting</strong> tab. Under <strong>Lifetime Payouts</strong>, you can view the corresponding payout for each period and filter by any date range to match your accounting needs.</p>
         </div></div>
       </div>
 
@@ -736,11 +756,39 @@
 
       <div class="accordion-item">
         <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span class="accordion-trigger-left">PIN Code 101</span>
+          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="accordion-content"><div class="accordion-body">
+          <p><strong>1. About PIN codes</strong></p>
+          <ul>
+            <li>Every employee with a Blackbird account has a unique 4-digit PIN — the last 4 digits of the phone number linked to their Blackbird account.</li>
+          </ul>
+          <p><strong>2. Activating a PIN</strong></p>
+          <ul>
+            <li>Tap your phone to the purple employee puck at your restaurant. Make sure you have the Blackbird app downloaded.</li>
+            <li>This action recognizes you as staff and activates your PIN.</li>
+          </ul>
+          <p><strong>3. If a PIN stops working</strong></p>
+          <ul>
+            <li>Employees must tap the employee puck at least once every 2 weeks.</li>
+            <li>2+ weeks of inactivity will clear industry status.</li>
+            <li>If needed, a manager's PIN can be used temporarily.</li>
+          </ul>
+          <p><strong>4. Viewing or editing PINs</strong></p>
+          <ul>
+            <li>In Back of House, navigate to: <strong>Settings → Staff PIN Management</strong> → Tap the three dots → Select <strong>Reset/Edit PIN</strong>.</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
           <span class="accordion-trigger-left">You don't know your PIN code</span>
           <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="accordion-content"><div class="accordion-body">
-          <p>It defaults to the last 4 digits of the phone number linked to your Blackbird account.</p>
+          <p>Checking in on the purple employee puck will generate a PIN, which defaults to the last 4 digits of the phone number linked to your Blackbird account.</p>
           <p>If you don't have a Blackbird account, you won't have a PIN — use the manager PIN instead.</p>
         </div></div>
       </div>
@@ -751,7 +799,8 @@
           <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="accordion-content"><div class="accordion-body">
-          <p>Locked out? Your login credentials are auto-saved. Tap <strong>Log In</strong>, tap into the email field (credentials auto-populate), then <strong>Sign In</strong>. If credentials don't appear, contact <a href="mailto:partners@blackbird.xyz">partners@blackbird.xyz</a> or text <strong>(646) 798-9362</strong>.</p>
+          <p>Locked out? Your login credentials are auto-saved. Tap <strong>Log In</strong>, tap into the email field (credentials auto-populate), then <strong>Sign In</strong>.</p>
+          <p>If credentials don't appear, contact our Partner Support team at <strong>(646) 798-9362</strong> or <a href="mailto:partners@blackbird.xyz">partners@blackbird.xyz</a>.</p>
         </div></div>
       </div>
 
@@ -828,34 +877,6 @@
           <p><strong>2. For older devices</strong></p>
           <ul>
             <li>If you see a bird icon, tap it to return to the Blackbird screen.</li>
-          </ul>
-        </div></div>
-      </div>
-
-      <div class="accordion-item">
-        <button class="accordion-trigger" onclick="toggleAccordion(this)">
-          <span class="accordion-trigger-left">No one knows the PIN</span>
-          <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="accordion-content"><div class="accordion-body">
-          <p><strong>1. About PIN codes</strong></p>
-          <ul>
-            <li>Every employee with a Blackbird account has a unique 4-digit PIN — the last 4 digits of the phone number linked to their Blackbird account.</li>
-          </ul>
-          <p><strong>2. Activating a PIN</strong></p>
-          <ul>
-            <li>Tap your phone to the purple employee puck at your restaurant. Make sure you have the Blackbird app downloaded.</li>
-            <li>This action recognizes you as staff and activates your PIN.</li>
-          </ul>
-          <p><strong>3. If a PIN stops working</strong></p>
-          <ul>
-            <li>Employees must tap the employee puck at least once every 2 weeks.</li>
-            <li>2+ weeks of inactivity will clear industry status.</li>
-            <li>If needed, a manager's PIN can be used temporarily.</li>
-          </ul>
-          <p><strong>4. Viewing or editing PINs</strong></p>
-          <ul>
-            <li>In Back of House, navigate to: <strong>Settings → Staff PIN Management</strong> → Tap the three dots → Select <strong>Reset/Edit PIN</strong>.</li>
           </ul>
         </div></div>
       </div>
@@ -973,6 +994,36 @@
       const noResults = document.getElementById('faq-no-results');
       if (noResults) noResults.style.display = anyVisible ? 'none' : 'block';
     }
+
+    // Highlight nav pill for the section currently in view
+    const navLinks = document.querySelectorAll('.faq-nav-link');
+    const sections = ['getting-started', 'payment-troubleshooting', 'terminal-troubleshooting'];
+
+    function setActiveNav(id) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+      });
+    }
+
+    // Set active on click immediately
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const id = link.getAttribute('href').slice(1);
+        setActiveNav(id);
+      });
+    });
+
+    // Update active as user scrolls
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActiveNav(entry.target.id);
+      });
+    }, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
+
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
   </script>
 
 </body>
