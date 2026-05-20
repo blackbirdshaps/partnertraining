@@ -231,6 +231,12 @@
     .video-card:nth-child(4) { animation-delay: 0.32s; }
     .video-card:nth-child(5) { animation-delay: 0.40s; }
 
+    .video-card.selected {
+      border-color: var(--accent);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 0 0 2px rgba(76, 95, 249, 0.35), 0 16px 48px -8px rgba(76, 95, 249, 0.3);
+    }
+
     .video-card:hover {
       border-color: var(--accent-border);
       transform: translateY(-4px) scale(1.01);
@@ -801,6 +807,9 @@
       const src = card.dataset.src;
       const title = card.dataset.title;
 
+      document.querySelectorAll('.video-card.selected').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+
       lightboxTitle.textContent = title;
       const cacheBust = src.includes('navattic') ? src : src + '?v=' + Date.now();
       lightboxEmbed.innerHTML = '<iframe src="' + cacheBust + '" allow="fullscreen" allowfullscreen></iframe>';
@@ -814,6 +823,7 @@
     function closeLightbox() {
       lightbox.classList.remove('active');
       document.body.style.overflow = '';
+      document.querySelectorAll('.video-card.selected').forEach(c => c.classList.remove('selected'));
 
       // Remove iframe after transition completes to stop playback
       setTimeout(function() {
